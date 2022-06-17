@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  python-ai-jupyter:
+    build: ./
+    image: "jaboo/miw:0.2"
+    ports:
+      - 8888:8888
+    volumes:
+      - "../${PROJECT}:/project:rw"
