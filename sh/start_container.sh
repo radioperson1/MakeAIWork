@@ -17,7 +17,7 @@ student="stud${nr}"
 containerdir="/home/${student}/project"
 # containerdir="/project"
 
-cmd="docker run -it --rm --env STUDENT=${student} --name ${containername} -p8888:8888 -v '${hostdir}:${containerdir}'"
+cmd="docker run -it --rm --env STUDENT=${student} --name ${containername} -p8888:8888 -v \"${hostdir}:${containerdir}\""
 
 # Run with entrypoint?
 if [ $# -gt 1 ]
@@ -35,4 +35,5 @@ if [ $# -gt 2 ]
 fi
 
 cmd="${cmd} ${image}"
+
 eval ${cmd}
