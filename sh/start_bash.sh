@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-entrypoint="/opt/conda/bin/python"
-containername="python-ai-repl"
+export PROJECT="project_1"
+
+entrypoint="/bin/bash"
+containername="python-ai-bash"
 
 cmd="sh/start_container.sh ${containername} ${entrypoint}"
 eval ${cmd}

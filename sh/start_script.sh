@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
-if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied"
-    exit 1;
+if [ $# -eq 0 ] 
+then
+  echo "Too less arguments supplied\nUSAGE : runscript script"
+  exit 1;
 fi
 
-containername="python-ai-script"
-entrypoint="/run_script.sh"
 script="$1"
+containername="python-ai-script"
+entrypoint="run_script"
 
-cmd="./start_container.sh ${entrypoint} ${containername} ${script}"
-echo $cmd
-eval $cmd
+cmd="sh/start_container.sh ${containername} ${entrypoint} ${script}"
+eval ${cmd}

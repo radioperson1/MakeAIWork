@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
-export PROJECT="project_1"
+containername="python-ai-jupyter"
 
-./start_docker_compose.sh ../yaml/jupyter.yaml | grep -Eo 'http://127.0.0.1:8888/lab\?.*'
+export PROJECT="project_1"
+export STUDENT="stud${nr}"
+
+cmd="sh/start_container.sh ${containername}"
+
+echo "Open the URL in your browser"
+eval ${cmd} | grep -Eo 'http://127.0.0.1:8888/lab\?.*'

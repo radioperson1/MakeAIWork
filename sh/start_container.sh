@@ -2,23 +2,37 @@
 
 export PROJECT="project_1"
 
-if [ $# -lt 2 ]
-  then echo "Too less arguments supplied" && exit 1;    
+if [ $# -lt 1 ]
+  then echo "Too less arguments supplied\nUSAGE : $0 containername [entrypoint] [script]" && exit 1;    
 fi
 
-entrypoint="$1"
-containername="$2"
-echo $script
-
-image="jaboo/miw:0.2"
+containername="$1"
+name="jaboo/miw"
+version=0.2
+image="${name}:${version}"
 portmapping="8888:8888"
-hostdir="${PWD}/../${PROJECT}"
-containerdir="/project"
+hostdir="${PWD}/${PROJECT}"
+nr=$(echo ${version} | sed 's/\.//')
+student="stud${nr}"
+containerdir="/home/${student}/project"
+# containerdir="/project"
 
-if [ $# -gt 2 ]
-  # Run with script
-  script="${containerdir}/python/$3"
-  then docker run -it --rm -e SCRIPT=${script} --name ${containername} -v "${hostdir}:${containerdir}" --entrypoint "${entrypoint}" ${image}
-else
-  docker run -it --rm --name ${containername} -v "${hostdir}:${containerdir}" --entrypoint "${entrypoint}" ${image}
+cmd="docker run -it --rm --env STUDENT=${student} --name ${containername} -p8888:8888 -v '${hostdir}:${containerdir}'"
+
+# Run with entrypoint?
+if [ $# -gt 1 ]
+  then 
+    entrypoint="$2"
+    # printf "entrypoint : %s\n" $entrypoint
+    cmd="${cmd} --entrypoint ${entrypoint}"
 fi
+
+# Run with script?
+if [ $# -gt 2 ]
+  then 
+    script="${containerdir}/python/$3"
+    cmd="${cmd} -e SCRIPT=${script}"  
+fi
+
+cmd="${cmd} ${image}"
+eval ${cmd}
