@@ -1,6 +1,4 @@
 sh/.idea
-project_1/.ipynb_checkpoints/
 sh/test_start_script.sh
-project_1/python/unescape.py
-project_1/notebooks/vrijdag.ipynb
 .idea/
+project_1/notebooks/.ipynb_checkpoints
