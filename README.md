@@ -11,7 +11,7 @@ This repository contains sources to be used by python students. There are three 
 
 ## Python AI Workspace
 
-Students use a containerised Python environment running the [Docker](https://www.docker.com/) image 'jaboo/miw' available at [Dockerhub](https://hub.docker.com/repository/docker/jaboo/miw). The project files are accessible in the containerised runtime environment by means of a dynamic mount. For example, when the latest version of the image is 0.2 then the studentname $STUDENT used in the container is stud02 and the home directory $HOME is <i>/home/stud02</i>. So during the first project $PROJECT directory <b>$PWD/project_1</b> is being mounted at container directory <b>/home/stud02/project</b>.
+Students use a containerised Python environment running the [Docker](https://www.docker.com/) image 'jaboo/miw' available at [Dockerhub](https://hub.docker.com/repository/docker/jaboo/miw). The project files are accessible in the containerised runtime environment by means of a dynamic mount. For example, when the latest version of the image is 0.2 then the studentname $STUDENT used in the container is stud02 and the home directory $HOME is <i>/home/stud02</i> which will be mounted to the host directory $PWD/project.
 <br>
 
 ### Start a Python container
@@ -22,7 +22,7 @@ Python can run in different modi:
 <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
 
 ```bash 
-sh/start_repl.sh
+run/python.sh
 ```
 </li>
 
@@ -30,19 +30,19 @@ sh/start_repl.sh
 Start python with a <b>script</b>
 
 ```bash 
-sh/start_script.sh examples/sum.py
+run/python.sh examples/sum.py
 ```
 </li>
 Start <b>Jupyter</b> to learn from the <i>notebooks</i> available at <i>$PROJECT/notebooks</i>
 
 ```bash 
-sh/start_jupyter.sh
+run/jupyter.sh
 ```
 <li>
 Start container with an interactive <b>bash</b> (expert mode) to perform system operations
 
 ```bash
-sh/start_bash.sh
+run/bash.sh
 ```
 </li>
 
