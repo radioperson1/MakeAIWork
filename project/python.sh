@@ -5,7 +5,7 @@ nr_of_arguments=${#argument_values[@]}
 
 containername="python-ai"
 entrypoint="run_script"
-cmd="run/container.sh ${containername} ${entrypoint}"
+cmd="../run/miw_container.sh ${containername} ${entrypoint}"
 
 # Run with script?
 if [ $nr_of_arguments -gt 0 ]; then
@@ -13,5 +13,4 @@ if [ $nr_of_arguments -gt 0 ]; then
   containername="${containername}-script"
 fi
 
-echo ${cmd}
 eval ${cmd}

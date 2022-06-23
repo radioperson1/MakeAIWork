@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-run/python.sh p1/scripts/examples/sort.py
+run/python.sh "scripts/examples/sum.py"

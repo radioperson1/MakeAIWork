@@ -33,7 +33,7 @@ Start python with a <b>script</b>
 run/python.sh examples/sum.py
 ```
 </li>
-Start <b>Jupyter</b> to learn from the <i>notebooks</i> available at <i>$PROJECT/notebooks</i>
+Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>$PROJECT/notebooks</i>
 
 ```bash 
 run/jupyter.sh
