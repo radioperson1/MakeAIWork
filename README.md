@@ -2,11 +2,12 @@
 
 ## Projects
 
-This repository contains sources to be used by python students. There are three project directories (project_1, project_2, project_3), each containing:
+This repository contains sources to be used by python students. Directory <i>project</i> contains the (re)sources:
 <ul>
-<li>cursus_materiaal</li> with the project description
+<li>p1, p2 and p3</i> containing
+<i>cursus_materiaal</i> with a project description
 <li>notebooks</li> containing Jupyter notebooks for reference
-<li>python</li> containing Python scripts of the student aswell as example scripts
+<li>scripts</li> with some example Python scripts 
 </ul>
 
 ## Python AI Workspace
@@ -22,7 +23,7 @@ Python can run in different modi:
 <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
 
 ```bash 
-run/python.sh
+./python.sh
 ```
 </li>
 
@@ -33,7 +34,7 @@ Start python with a <b>script</b> from directory <i>project</i>
 ./python.sh scripts/lists/sum.py
 ```
 </li>
-Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>$PROJECT/notebooks</i>
+Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
 
 ```bash 
 ./jupyter.sh
@@ -45,7 +46,7 @@ Start container with an interactive <b>bash</b> (expert mode) to perform system 
 ./bash.sh
 ```
 </li>
-
+    
 </ul>
 
 ## References
