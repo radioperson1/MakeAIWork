@@ -27,22 +27,22 @@ run/python.sh
 </li>
 
 <li>
-Start python with a <b>script</b>
+Start python with a <b>script</b> from directory <i>project</i>
 
 ```bash 
-run/python.sh examples/sum.py
+./python.sh scripts/lists/sum.py
 ```
 </li>
 Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>$PROJECT/notebooks</i>
 
 ```bash 
-run/jupyter.sh
+./jupyter.sh
 ```
 <li>
 Start container with an interactive <b>bash</b> (expert mode) to perform system operations
 
 ```bash
-run/bash.sh
+./bash.sh
 ```
 </li>
 
