@@ -115,6 +115,13 @@ Check if you are able to use Docker by running the following in <b>Git Bash</b>
 docker run hello-world
 ```
 
+### Optional: Ubuntu on Windows
+
+**Generate key**
+```sh
+ssh-keygen -t Ed25519 -C student@hogeschool.nl
+```
+
 ### References
 [How to Install the SSH-Agent Service in Windows](https://interworks.com/blog/2021/09/15/setting-up-ssh-agent-in-windows-for-passwordless-git-authentication/)<br>
 [How to Use Linux Terminal in Windows 10](https://allthings.how/how-to-use-linux-terminal-in-windows-10/)<br>
