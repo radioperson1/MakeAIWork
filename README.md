@@ -22,7 +22,7 @@ ${hostdir_project}:${containerdir_project}
 causing directory <i>project</i> on your laptop to be mounted to <i>/project</i> at the container.
 <br>
 
-***CAUTION
+***CAUTION***
 You can remove both container and image without data loss but be aware that files removed from the container directory /project will also be removed from you host directory project.
 
 ### Start a Python container
