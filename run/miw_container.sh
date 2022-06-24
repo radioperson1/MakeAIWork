@@ -4,23 +4,19 @@ argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
 name="jaboo/miw"
-version=0.2
-image="${name}:${version}"
-portmapping="8888:8888"
-# hostdir=${PWD}
-nr=$(echo ${version} | sed 's/\.//')
-student="stud${nr}"
+image="${name}:latest"
 containername="${argument_values[0]}"
-containerdir_project="/home/${student}/project"
+containerdir_project="/project"
 hostdir_project="${PWD}"
 containerdir_work="/home/jovyan/work"
 hostdir_work="${PWD}/notebooks"
 
-cmd="docker run -it --rm --env STUDENT=${student} --name ${containername} -v \"${hostdir_project}:${containerdir_project}\""
+cmd="docker run -it --rm --name ${containername} -v \"${hostdir_project}:${containerdir_project}\""
 
 # Default entrypoint
 if [ $nr_of_arguments -lt 2 ]; then
-  cmd="${cmd} -v \"${hostdir_work}:${containerdir_work}\" -p8888:8888" 
+  portmapping="8888:8888"
+  cmd="${cmd} -v \"${hostdir_work}:${containerdir_work}\" -p${portmapping}" 
 fi
 
 # Python entrypoint
