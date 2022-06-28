@@ -1,22 +1,28 @@
 #!/usr/bin/env bash
 
+argument_names=("containername" "[entrypoint]" "[script]")
 argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
-name="jaboo/miw"
-image="${name}:latest"
-containername="${argument_values[0]}"
-containerdir_project="/project"
-hostdir_project="${PWD}"
-containerdir_work="/home/jovyan/work"
-hostdir_work="${PWD}/notebooks"
+if [ $nr_of_arguments -lt 1 ]; then
+    printf "USAGE: %s %s\n" "$0" "${argument_names[*]}"
+    exit 1;
+fi
 
-cmd="docker run -it --rm --name ${containername} -v \"${hostdir_project}:${containerdir_project}\""
+name="jaboo/miw"
+image="${name}:0.3"
+containername="${argument_values[0]}"
+containerdir="/project"
+hostdir="${PWD}"
+
+cmd="docker run -it --rm --name ${containername}"
 
 # Default entrypoint
 if [ $nr_of_arguments -lt 2 ]; then
+  containerdir="${containerdir}/notebooks"
+  hostdir="${PWD}/notebooks"
   portmapping="8888:8888"
-  cmd="${cmd} -v \"${hostdir_work}:${containerdir_work}\" -p${portmapping}" 
+  cmd="${cmd} -p${portmapping}" 
 fi
 
 # Python entrypoint
@@ -27,9 +33,9 @@ fi
 
 # Run with script
 if [ $nr_of_arguments -gt 2 ]; then 
-    script="${containerdir_project}/${argument_values[2]}"
+    script="${containerdir}/${argument_values[2]}"
     cmd="${cmd} -e SCRIPT=${script}"  
 fi
 
-cmd="${cmd} ${image}"
-eval ${cmd}
+cmd="${cmd} -v \"${hostdir}:${containerdir}\" ${image}"
+echo ${cmd} && eval ${cmd}
