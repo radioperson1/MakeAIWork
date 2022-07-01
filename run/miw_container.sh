@@ -9,33 +9,46 @@ if [ $nr_of_arguments -lt 1 ]; then
     exit 1;
 fi
 
-name="jaboo/miw"
-image="${name}:0.3"
-containername="${argument_values[0]}"
-containerdir="/project"
-hostdir="${PWD}"
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
 
+name="jaboo/miw"
+image="${name}:latest"
+containername="${argument_values[0]}"
+hostdir_project=${PWD}
+hostdir_work="../notebooks"
+
+if [ $machine == "Cygwin" ]; then 
+    hostdir_project=$(cygpath -w -p ${hostdir_project})
+    hostdir_work=$(cygpath -w -p ${hostdir_work})
+fi
+
+containerdir_project="/home/student/project"
+containerdir_work="/home/student/notebooks"
 cmd="docker run -it --rm --name ${containername}"
 
 # Default entrypoint
 if [ $nr_of_arguments -lt 2 ]; then
-  containerdir="${containerdir}/notebooks"
-  hostdir="${PWD}/notebooks"
-  portmapping="8888:8888"
-  cmd="${cmd} -p${portmapping}" 
+    portmapping="8888:8888"
+    cmd="${cmd} -p${portmapping} -v \"${hostdir_work}:${containerdir_work}\"" 
 fi
 
 # Python entrypoint
 if [ $nr_of_arguments -gt 1 ]; then 
     # Add entrypoint
-    cmd="${cmd} --entrypoint "${argument_values[1]}""
+    cmd="${cmd} --entrypoint ${argument_values[1]} -v \"${hostdir_project}:${containerdir_project}\""
 fi
 
 # Run with script
 if [ $nr_of_arguments -gt 2 ]; then 
-    script="${containerdir}/${argument_values[2]}"
+    script="${containerdir_project}/${argument_values[2]}"
     cmd="${cmd} -e SCRIPT=${script}"  
 fi
 
-cmd="${cmd} -v \"${hostdir}:${containerdir}\" ${image}"
+cmd="${cmd} ${image}"
 echo ${cmd} && eval ${cmd}
