@@ -6,27 +6,25 @@ This repository contains sources to be used by python students. Directory <i>pro
 <ul>
 <li>p1, p2 and p3</i> containing
 <i>cursus_materiaal</i> with a project description
-<li>notebooks</li> containing Jupyter notebooks for reference
 <li>scripts</li> with some example Python scripts 
 </ul>
 
-## Python AI Workspace
+Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyter Lab.
 
+## Python AI Workspace
 Students use a containerised Python environment running a [Docker](https://www.docker.com/) image. 
 
 ### Files available to the container
-The project files are accessible in the containerised runtime environment by means of a bind mount:
-```sh
-${hostdir_project}:${containerdir_project}
- ```
-causing directory <i>project</i> on your laptop to be mounted to <i>/project</i> at the container.
+The project files are accessible in the containerised runtime environment by means of a bind mount between the current (host)directory project and/or notebooks on your laptop and <i>/home/student/project</i> and/or <i>/home/student/nontebooks</i> at the container instance.
 <br>
 
 ***CAUTION***
+<br>
 You can remove both container and image without data loss but be aware that files removed from the container directory /project will also be removed from you host directory project.
+<br>
 
 ### Start a Python container
-Python can run in different modi:
+Docker scripts can be found in <i>docker</i>. Each of the scripts below will call <i>docker/run/miw_container.sh</i> to facilitate the following runtimes:
 <ul>
 
 <li>
@@ -83,14 +81,11 @@ run/clean_docker_artifacts.sh
 Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
 
 ---
-## Installation
+## Setup Workspace
 
-### Git
-Download and install [Git for Windows](https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe).
+### Windows
 
-Copy public key to git
-
-### Windows Subsystem for Linux 
+#### Windows Subsystem for Linux 
 To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. This can be done by running the following commands in <b>Powershell</b>. 
 
 Enable WSL2
@@ -108,18 +103,31 @@ Make WSL 2 Default
 wsl –set-default-version 2
 ```
 
-### Docker
 Download and install [Docker Desktop on Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)<br>
 Check if you are able to use Docker by running the following in <b>Git Bash</b>
 ```sh
 docker run hello-world
 ```
 
-### Optional: Ubuntu on Windows
+Configure Docker Desktop to start when you login.
 
-**Generate key**
+Install [Cygwin](https://www.cygwin.com/) and select <i>git</i> te be installed as additional package.
+
+Install [Visual Studio Code](https://code.visualstudio.com/).
+
+### Clone the source code
+
+Create a [Github](https://github.com/) account. 
+
+Start a shell and generate a secret key pair with your student email adress
 ```sh
-ssh-keygen -t Ed25519 -C student@hogeschool.nl
+ssh-keygen -t Ed25519 -C {your@student.email.com}
+```
+Copy your <b>public</b> key to your github profile.
+
+Create a fork of this repository and clone your <b>fork</b> from the shell
+```sh
+git clone git@{your_github_username}/MakeAIWork
 ```
 
 ### References
