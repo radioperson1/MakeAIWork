@@ -33,7 +33,7 @@ Python can run in different modi:
 <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
 
 ```bash 
-./python.sh
+sh/python.sh
 ```
 </li>
 
@@ -41,19 +41,19 @@ Python can run in different modi:
 Start python with a <b>script</b> from directory <i>project</i>
 
 ```bash 
-./python.sh scripts/lists/sum.py
+sh/python.sh scripts/lists/sum.py
 ```
 </li>
 Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
 
 ```bash 
-./jupyter.sh
+sh/jupyter.sh
 ```
 <li>
 Start container with an interactive <b>bash</b> (expert mode) to perform system operations
 
 ```sh
-./bash.sh
+sh/bash.sh
 ```
 
 ### Docker artifacts

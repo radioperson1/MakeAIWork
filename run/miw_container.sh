@@ -20,8 +20,8 @@ esac
 name="jaboo/miw"
 image="${name}:latest"
 containername="${argument_values[0]}"
-hostdir_project=${PWD}
-hostdir_work="../notebooks"
+hostdir_project="${PWD}/project"
+hostdir_work="${PWD}/notebooks"
 
 if [ $machine == "Cygwin" ]; then 
     hostdir_project=$(cygpath -w -p ${hostdir_project})
@@ -35,12 +35,10 @@ cmd="docker run -it --rm --name ${containername}"
 # Default entrypoint
 if [ $nr_of_arguments -lt 2 ]; then
     portmapping="8888:8888"
+    # Add pormapping and map directory notebooks
     cmd="${cmd} -p${portmapping} -v \"${hostdir_work}:${containerdir_work}\"" 
-fi
-
-# Python entrypoint
-if [ $nr_of_arguments -gt 1 ]; then 
-    # Add entrypoint
+else
+    # Add entrypoint and map directory project
     cmd="${cmd} --entrypoint ${argument_values[1]} -v \"${hostdir_project}:${containerdir_project}\""
 fi
 
