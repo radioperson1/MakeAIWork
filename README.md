@@ -75,25 +75,39 @@ Removing images and/containers will not cause data loss. After removing the imag
 ---
 ## Setup Workspace
 
-### Windows
-
-#### Windows Subsystem for Linux 
+### Enable WLS with Windows Powershell
 To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. This can be done by running the following commands in <b>Powershell</b>. 
+
+<ol>
+
+<li>
 
 Enable WSL2
 ```pwsh
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
- Enable the Virtual Machine Platform feature
+</li>
+
+<li>
+
+Enable the Virtual Machine Platform feature
 ```pwsh
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
+
+</li>
+
+<li>
 
 Make WSL 2 Default
 ```pwsh
 wsl –set-default-version 2
 ```
+
+</li>
+
+<li>
 
 Download and install [Docker Desktop on Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)<br>
 Check if you are able to use Docker by running the following in <b>Git Bash</b>
@@ -103,26 +117,61 @@ docker run hello-world
 
 Configure Docker Desktop to start when you login.
 
-Install [Cygwin](https://www.cygwin.com/) and select <i>git</i> te be installed as additional package.
-
 Install [Visual Studio Code](https://code.visualstudio.com/).
 
 ### Clone the source code
+To be able to use this repository and handover your code, you need to have remote access to Github.
 
-Create a [Github](https://github.com/) account. 
+<ol>
 
-Start a shell and generate a secret key pair with your student email adress
+<li>
+
+Create an account at [Github](https://github.com) 
+
+</li>
+
+<li>
+
+Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system. Make sure you select "Checkout as-is, commit Unix-style line endings"
+
+</li>
+
+<li>
+
+Configure ssh access
+
+<ul>
+<li>
+
+Start a (git) bash shell and generate a secret key pair with your student email adress
+
 ```sh
 ssh-keygen -t Ed25519 -C {your@student.email.com}
 ```
-Copy your <b>public</b> key to your github profile.
+
+</li>
+
+<li>
+
+Copy your <b>public</b> key to your github profile
+
+```sh
+cat ~/.ssh/id_ed25519.pub
+```
+
+</li>
+
+<li>
 
 Create a fork of this repository and clone your <b>fork</b> from the shell
 ```sh
-git clone git@{your_github_username}/MakeAIWork
+git clone git@github.com:{your_username}/MakeAIWork.git
 ```
 
+</li>
+
+</ol>
+
 ### References
-[How to Install the SSH-Agent Service in Windows](https://interworks.com/blog/2021/09/15/setting-up-ssh-agent-in-windows-for-passwordless-git-authentication/)<br>
 [How to Use Linux Terminal in Windows 10](https://allthings.how/how-to-use-linux-terminal-in-windows-10/)<br>
 [Jupyter](https://jupyter.org/)
