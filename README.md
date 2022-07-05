@@ -25,29 +25,21 @@ You can remove both container and image without data loss but be aware that file
 
 ### Start a Python container
 Docker scripts can be found in <i>docker</i>. Each of the scripts below will call <i>docker/run/miw_container.sh</i> to facilitate the following runtimes:
-<ul>
-
-<li>
 <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
 
 ```bash 
 sh/python.sh
 ```
-</li>
-
-<li>
 Start python with a <b>script</b> from directory <i>project</i>
 
 ```bash 
 sh/python.sh scripts/lists/sum.py
 ```
-</li>
 Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
 
 ```bash 
 sh/jupyter.sh
 ```
-<li>
 Start container with an interactive <b>bash</b> (expert mode) to perform system operations
 
 ```sh
