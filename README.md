@@ -2,16 +2,140 @@
 
 ## Projects
 
-This repository contains sources to be used by python students. Directory <i>project</i> contains the (re)sources:
+This repository contains sources to be used by python students. Directory <i>projects</i> contains the (re)sources:
 <ul>
 <li>p1, p2 and p3</i> containing
 <i>cursus_materiaal</i> with a project description
-<li>scripts</li> with some example Python scripts 
 </ul>
 
-Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyter Lab.
+Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyter Lab. Directory <i>scripts</i> contains some example Python scripts. 
 
-## Python AI Workspace
+## Python AI Workspace Installation
+
+### Enable WLS with Windows Powershell
+To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. This can be done by running the following commands in <b>Powershell</b>. 
+
+<ol>
+
+<li>
+
+Enable WSL2
+```pwsh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+
+</li>
+
+<li>
+
+Enable the Virtual Machine Platform feature
+```pwsh
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+</li>
+
+<li>
+
+Make WSL 2 Default
+```pwsh
+wsl –set-default-version 2
+```
+
+</li>
+
+<li>
+
+Download and install [Docker Desktop on Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)<br>
+Check if you are able to use Docker by running the following in <b>Git Bash</b>
+```sh
+docker run hello-world
+```
+<li>
+
+Configure Docker Desktop to start when you login.
+
+</li>
+
+</ol>
+
+### Clone the source code
+To be able to use this repository and handover your code, you need to have remote access to Github.
+
+<ol>
+
+<li>
+
+Create an account at [Github](https://github.com) 
+
+</li>
+
+<li>
+
+Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system. Make sure you select "Checkout as-is, commit Unix-style line endings"
+
+</li>
+
+<li>
+
+Create a personal access token
+
+<ul>
+<li>
+
+Start a (git) bash shell and generate a secret key pair with your student email adress
+
+```sh
+ssh-keygen -t Ed25519 -C {your@student.email.com}
+```
+
+</li>
+
+<li>
+
+Copy your <b>public</b> key to your github profile
+
+```sh
+cat ~/.ssh/id_ed25519.pub
+```
+
+</li>
+
+<li>
+
+Create a fork of this repository and clone your <b>fork</b> from the shell
+```sh
+git clone git@github.com:{your_username}/MakeAIWork.git
+```
+
+</li>
+
+</ol>
+
+### Edit with Visual Studio Code
+<ol>
+
+<li>
+
+Install [Visual Studio Code (vscode)](https://code.visualstudio.com/). 
+
+</li>
+
+<li>
+
+Start vscode with command from current directory.
+
+Start a (git) bash shell and enter directory MakeAIWork, from there use the command <i>code</i> to start vscode.
+```sh
+cd MakeAIWork
+code .
+```
+
+</li>
+
+</ol>
+
+## Python AI Workspace Usage
 Students use a containerised Python environment running a [Docker](https://www.docker.com/) image. 
 
 ### Files available to the container
@@ -71,106 +195,7 @@ run/clean_docker_artifacts.sh
 
 ***NOTE
 Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
-
 ---
-## Setup Workspace
-
-### Enable WLS with Windows Powershell
-To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. This can be done by running the following commands in <b>Powershell</b>. 
-
-<ol>
-
-<li>
-
-Enable WSL2
-```pwsh
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
-
-</li>
-
-<li>
-
-Enable the Virtual Machine Platform feature
-```pwsh
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-```
-
-</li>
-
-<li>
-
-Make WSL 2 Default
-```pwsh
-wsl –set-default-version 2
-```
-
-</li>
-
-<li>
-
-Download and install [Docker Desktop on Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)<br>
-Check if you are able to use Docker by running the following in <b>Git Bash</b>
-```sh
-docker run hello-world
-```
-
-Configure Docker Desktop to start when you login.
-
-Install [Visual Studio Code](https://code.visualstudio.com/).
-
-### Clone the source code
-To be able to use this repository and handover your code, you need to have remote access to Github.
-
-<ol>
-
-<li>
-
-Create an account at [Github](https://github.com) 
-
-</li>
-
-<li>
-
-Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system. Make sure you select "Checkout as-is, commit Unix-style line endings"
-
-</li>
-
-<li>
-
-Configure ssh access
-
-<ul>
-<li>
-
-Start a (git) bash shell and generate a secret key pair with your student email adress
-
-```sh
-ssh-keygen -t Ed25519 -C {your@student.email.com}
-```
-
-</li>
-
-<li>
-
-Copy your <b>public</b> key to your github profile
-
-```sh
-cat ~/.ssh/id_ed25519.pub
-```
-
-</li>
-
-<li>
-
-Create a fork of this repository and clone your <b>fork</b> from the shell
-```sh
-git clone git@github.com:{your_username}/MakeAIWork.git
-```
-
-</li>
-
-</ol>
 
 ### References
 [How to Use Linux Terminal in Windows 10](https://allthings.how/how-to-use-linux-terminal-in-windows-10/)<br>
