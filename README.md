@@ -149,21 +149,41 @@ You can remove both container and image without data loss but be aware that file
 
 ### Start a Python container
 Docker scripts can be found in <i>docker</i>. Each of the scripts below will call <i>docker/run/miw_container.sh</i> to facilitate the following runtimes:
+
+<ul>
+
+<li>
+
 <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
 
 ```bash 
 sh/python.sh
 ```
+
+</li>
+
+<li>
+
 Start python with a <b>script</b> from directory <i>project</i>
 
 ```bash 
 sh/python.sh scripts/lists/sum.py
 ```
-Start <b>Jupyter Server</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
+
+</li>
+
+<li>
+
+Start <b>Jupyter Lab</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
 
 ```bash 
 sh/jupyter.sh
 ```
+
+</li>
+
+<li>
+
 Start container with an interactive <b>bash</b> (expert mode) to perform system operations
 
 ```sh
@@ -188,13 +208,12 @@ docker container
 </ul>
 
 ### Removing Docker artifacts
+Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
 Docker images and containers can be removed (if not done automatically) by running
 ```sh
 run/clean_docker_artifacts.sh
 ```
 
-***NOTE
-Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
 ---
 
 ### References
