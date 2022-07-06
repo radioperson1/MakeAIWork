@@ -11,23 +11,25 @@ fi
 
 # Host
 
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    *)          machine="UNKNOWN:${unameOut}"
-esac
-
 hostdir_home="${PWD}"
 hostdir_notebooks="${hostdir_home}/notebooks"
 hostdir_projects="${hostdir_home}/projects"
 hostdir_scripts="${hostdir_home}/scripts"
 
-if [ $machine == "Cygwin" ]; then 
-    hostdir_projects=$(cygpath -w -p ${hostdir_projects})
+function convert_paths {
+    echo "Convert paths"
     hostdir_notebooks=$(cygpath -w -p ${hostdir_notebooks})
-fi
+    hostdir_projects=$(cygpath -w -p ${hostdir_projects})
+    hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
+}
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    *)          machine="UNKNOWN:${unameOut}" && convert_paths
+esac
 
 # Container
 
@@ -47,7 +49,10 @@ if [ $nr_of_arguments -lt 2 ]; then
     cmd="${cmd} -p${portmapping} -v \"${hostdir_notebooks}:${containerdir_notebooks}\"" 
 else
     # Add entrypoint and map directory project
-    cmd="${cmd} --entrypoint ${argument_values[1]} -v \"${hostdir_projects}:${containerdir_projects}\" -v \"${hostdir_scripts}:${containerdir_scripts}\""
+    cmd="${cmd} --entrypoint ${argument_values[1]} \
+        -v \"${hostdir_projects}:${containerdir_projects}\" \
+        -v \"${hostdir_notebooks}:${containerdir_notebooks}\"
+        -v \"${hostdir_scripts}:${containerdir_scripts}\""
 fi
 
 # Run with script
