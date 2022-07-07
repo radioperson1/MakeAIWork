@@ -2,7 +2,7 @@ version: '3'
 
 services:
   python-script:
-    image: jaboo/miw:0.5
+    image: $IMAGE
     tty: false    
     entrypoint: 
       - python
