@@ -14,5 +14,7 @@ if [ $nr_of_arguments -gt 0 ]; then
   containername="${containername}-script"
 fi
 
-cmd="docker/run/miw_container.sh ${containername} ${entrypoint}"
+cmd="(cd docker/run; export SCRIPT=${script}; docker-compose up python-script)"
+
+echo ${cmd}
 eval ${cmd}
