@@ -12,53 +12,6 @@ Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyte
 
 ## Python AI Workspace Installation
 
-### Enable WLS with Windows Powershell
-To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. This can be done by running the following commands in <b>Powershell</b>. 
-
-<ol>
-
-<li>
-
-Enable WSL2
-```pwsh
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
-
-</li>
-
-<li>
-
-Enable the Virtual Machine Platform feature
-```pwsh
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-```
-
-</li>
-
-<li>
-
-Make WSL 2 Default
-```pwsh
-wsl –set-default-version 2
-```
-
-</li>
-
-<li>
-
-Download and install [Docker Desktop on Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)<br>
-Check if you are able to use Docker by running the following in <b>Git Bash</b>
-```sh
-docker run hello-world
-```
-<li>
-
-Configure Docker Desktop to start when you login.
-
-</li>
-
-</ol>
-
 ### Clone the source code
 To be able to use this repository and handover your code, you need to have remote access to Github.
 
@@ -66,24 +19,22 @@ To be able to use this repository and handover your code, you need to have remot
 
 <li>
 
-Create an account at [Github](https://github.com) 
+**Create an account at [Github](https://github.com)**
 
 </li>
 
 <li>
 
-Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system. Make sure you select "Checkout as-is, commit Unix-style line endings"
+**Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system**
+Make sure you select "Checkout as-is, commit Unix-style line endings"
 
 </li>
 
 <li>
 
-Create a personal access token
+**Create a ssh key-paier token**
 
-<ul>
-<li>
-
-Start a (git) bash shell and generate a secret key pair with your student email adress
+Start a (git) bash shell *and generate a secret key pair with your student email adress
 
 ```sh
 ssh-keygen -t Ed25519 -C {your@student.email.com}
@@ -93,20 +44,94 @@ ssh-keygen -t Ed25519 -C {your@student.email.com}
 
 <li>
 
-Copy your <b>public</b> key to your github profile
+**Copy your <b>public</b> key to Github**
 
+Enter the following in (git)bash to view the contents of you public key:
 ```sh
 cat ~/.ssh/id_ed25519.pub
+```
+and copy this in the text area when adding a [new ssh key in GitHub](https://github.com/settings/ssh/new)
+
+</li>
+
+<li>
+
+**Create a fork of this repository** 
+
+</li>
+
+</li>
+
+**Clone your <b>fork</b>**
+
+Ennter the following command in your (git)bash shell after replacing {your_github_username} with your Gihub username.
+```sh
+git clone git@github.com:{your_github_username}/MakeAIWork.git
 ```
 
 </li>
 
 <li>
 
-Create a fork of this repository and clone your <b>fork</b> from the shell
-```sh
-git clone git@github.com:{your_username}/MakeAIWork.git
+**Provide teachers access to your forked repository**
+
+Go to settings and add user MitwRdam as contributor.
+
+</li>
+
+</ol>
+### Install Docker
+To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. 
+
+<ol>
+
+<li>
+
+**Enable WSL2**
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
+
+</li>
+
+<li>
+
+**Enable the Virtual Machine Platform feature**
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+</li>
+
+<li>
+
+**Make WSL 2 Default**
+Enter the following command in Windows Powershell:
+```pwsh
+wsl –set-default-version 2
+```
+
+</li>
+
+<li>
+
+**Download and install [Docker Desktop](https://desktop.docker.com)**
+<br>
+Check if you are able to use Docker by running the following in <b>(git) bash</b>
+```sh
+docker run hello-world
+```
+<li>
+
+**Configure Docker Desktop to start when you login**
+
+</li>
+
+<li>
+
+**Configure Docker Desktop to enable docker-compose**
 
 </li>
 
