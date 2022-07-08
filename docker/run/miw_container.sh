@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-argument_names=("containername" "[entrypoint]" "[script]")
+argument_names=("mode" "[script]")
 argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
@@ -31,35 +31,46 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}" && convert_paths
 esac
 
+export HOSTPATH_NOTEBOOKS=${hostdir_notebooks}
+export HOSTPATH_PROJECT=${hostdir_projects}
+export HOSTPATH_SCRIPTS=${hostdir_scripts}
+
 # Container
+
+mode="${argument_values[0]}"
 
 name="jaboo/miw"
 image="${name}:latest"
-containername="${argument_values[0]}"
+containername="python-ai-${mode}"
 container_home="/home/student"
 containerdir_notebooks="${container_home}/notebooks"
 containerdir_projects="${container_home}/projects"
 containerdir_scripts="${container_home}/scripts"
-cmd="docker run -it --rm --name ${containername}"
+composepath="docker/compose"
 
-# Default entrypoint
-if [ $nr_of_arguments -lt 2 ]; then
-    portmapping="8888:8888"
-    # Add pormapping and map directory notebooks
-    cmd="${cmd} -p${portmapping} -v \"${hostdir_notebooks}:${containerdir_notebooks}\"" 
-else
-    # Add entrypoint and map directory project
-    cmd="${cmd} --entrypoint ${argument_values[1]} \
-        -v \"${hostdir_projects}:${containerdir_projects}\" \
-        -v \"${hostdir_notebooks}:${containerdir_notebooks}\"
-        -v \"${hostdir_scripts}:${containerdir_scripts}\""
-fi
+case "${mode}" in
+    bash*)
+        entrypoint="bash"
+        cmd="docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
+            -v \"${hostdir_projects}:${containerdir_projects}\" \
+            -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
+            -v \"${hostdir_scripts}:${containerdir_scripts}\" \
+            ${image}";;        
+    jupyter*)     
+        composefile="${composepath}/python-ai-notebook.yaml"
+        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
+    python-repl*)
+        entrypoint="run_script"
+        cmd="docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
+    python-script*)
+        composefile="${composepath}/python-ai-script.yaml"
+        export SCRIPT="${argument_values[1]}"
+        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
+    *)      
+        cmd="docker run -it --rm --name ${containername} ${image}";;        
+esac
 
-# Run with script
-if [ $nr_of_arguments -gt 2 ]; then 
-    script="${container_home}/${argument_values[2]}"
-    cmd="${cmd} -e SCRIPT=${script}"  
-fi
+export IMAGE=${image}
 
-cmd="${cmd} ${image}"
-echo ${cmd} && eval ${cmd}
+echo ${cmd}
+eval ${cmd}

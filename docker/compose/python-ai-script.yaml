@@ -8,4 +8,5 @@ services:
       - python
       - ${SCRIPT}
     volumes:
-      - ../../scripts:/home/student/scripts
+      - ${HOSTPATH_PROJECT}:/home/student/projects
+      - ${HOSTPATH_SCRIPTS}:/home/student/scripts
