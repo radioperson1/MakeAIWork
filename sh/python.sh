@@ -3,14 +3,14 @@
 argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
-containername="python-ai"
-entrypoint="run_script"
-cmd="docker/run/miw_container.sh ${containername} ${entrypoint}"
-
 # Run with script?
 if [ $nr_of_arguments -gt 0 ]; then
-  cmd="${cmd} \"${argument_values[0]}\""
-  containername="${containername}-script"
+  script="${argument_values[0]}"
+  printf "Run with script %s\n" ${script}
+  cmd="docker/run/miw_container.sh python-script ${script}"  
+else
+  cmd="docker/run/miw_container.sh python-repl"  
 fi
 
+echo ${cmd}
 eval ${cmd}
