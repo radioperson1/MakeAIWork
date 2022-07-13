@@ -25,7 +25,7 @@ To be able to use this repository and handover your code, you need to have remot
 
 <li>
 
-**Install [Git for Windows](https://gitforwindows.org/) in case you don't have a Mac or Linux system**
+**Install [Git for Windows](https://gitforwindows.org/) (Windows only)**
 Make sure you select "Checkout as-is, commit Unix-style line endings"
 
 </li>
@@ -54,7 +54,7 @@ and copy this in the text area when adding a [new ssh key in GitHub](https://git
 
 </li>
 
-<li>
+</li>
 
 **Create a fork of this repository** 
 
@@ -67,6 +67,19 @@ and copy this in the text area when adding a [new ssh key in GitHub](https://git
 Ennter the following command in your (git)bash shell after replacing {your_github_username} with your Gihub username.
 ```sh
 git clone git@github.com:{your_github_username}/MakeAIWork.git
+```
+
+</li>
+
+<li>
+
+**Add user to Git Config**
+
+In order to commit and push your changes, you need identitify yourself. 
+
+Open a (git)bash, enter directory MakeAIWork and run:
+```bash
+sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
 
 </li>
@@ -87,7 +100,7 @@ To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activate
 
 <li>
 
-**Enable WSL2**
+**Enable WSL2 (Windows only)**
 Enter the following command in Windows Powershell:
 ```pwsh
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -97,7 +110,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 
 <li>
 
-**Enable the Virtual Machine Platform feature**
+**Enable the Virtual Machine Platform feature (Windows only)**
 Enter the following command in Windows Powershell:
 ```pwsh
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
@@ -107,7 +120,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 <li>
 
-**Make WSL 2 Default**
+**Make WSL 2 Default (Windows only)**
 Enter the following command in Windows Powershell:
 ```pwsh
 wsl –set-default-version 2
@@ -117,7 +130,7 @@ wsl –set-default-version 2
 
 <li>
 
-**Download and install [Docker Desktop](https://desktop.docker.com)**
+**Download and install [Docker Desktop](https://desktop.docker.com) (Windows and MacOS)**
 <br>
 Check if you are able to use Docker by running the following in <b>(git) bash</b>
 ```sh
@@ -142,7 +155,7 @@ docker run hello-world
 
 <li>
 
-Install [Visual Studio Code (vscode)](https://code.visualstudio.com/). 
+Install [Visual Studio Code](https://code.visualstudio.com/). 
 
 </li>
 
