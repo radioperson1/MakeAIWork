@@ -32,7 +32,7 @@ Make sure you select "Checkout as-is, commit Unix-style line endings"
 
 <li>
 
-**Create a ssh key-paier token**
+**Create a ssh key-pair token**
 
 Start a (git) bash shell *and generate a secret key pair with your student email adress
 
