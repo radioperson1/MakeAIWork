@@ -171,6 +171,14 @@ code .
 
 </li>
 
+<li>
+
+Install Live Share
+
+Follow the instructions at [Collaborate with Live Share](https://code.visualstudio.com/learn/collaboration/live-share)
+
+</li>
+
 </ol>
 
 ## Python AI Workspace Usage
