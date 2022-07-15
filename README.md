@@ -84,14 +84,6 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 
 </li>
 
-<li>
-
-**Provide teachers access to your forked repository**
-
-Go to settings and add user MitwRdam as contributor.
-
-</li>
-
 </ol>
 ### Install Docker
 To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. 
