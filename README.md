@@ -10,7 +10,9 @@ This repository contains sources to be used by python students. Directory <i>pro
 
 Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyter Lab. Directory <i>scripts</i> contains some example Python scripts. 
 
-## Python AI Workspace Installation
+---
+
+## Python AI Workspace <i>Recommended</i> Installation
 
 ### Clone the source code
 To be able to use this repository and handover your code, you need to have remote access to Github.
@@ -25,7 +27,7 @@ To be able to use this repository and handover your code, you need to have remot
 
 <li>
 
-**Install [Git for Windows](https://gitforwindows.org/) (Windows only)**
+**Install [Git for Windows](https://gitforwindows.org/) (Recommended for Windows users)**
 Make sure you select "Checkout as-is, commit Unix-style line endings"
 
 </li>
@@ -86,24 +88,16 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 
 </ol>
 
-### Install Docker
-To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. 
-
+## Enable WSL2 (Windows only)
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
 <ol>
 
 <li>
 
 **Check If Your Processor Supports [Virtualization](https://www.technorms.com/8208/check-if-processor-supports-virtualization)**
-
-</li>
-
-<li>
-
-**Enable WSL2 (Windows only)**
-Enter the following command in Windows Powershell:
-```pwsh
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
 
 </li>
 
@@ -126,6 +120,12 @@ wsl –set-default-version 2
 ```
 
 </li>
+
+</ol>
+
+## Install Docker (recommended)
+
+<ol>
 
 <li>
 
@@ -154,7 +154,7 @@ docker run hello-world
 
 </ol>
 
-### Edit with Visual Studio Code
+## Edit with Visual Studio Code
 <ol>
 
 <li>
@@ -191,7 +191,38 @@ Follow the instructions at [Collaborate with Live Share](https://code.visualstud
 
 </ol>
 
-### (Optional) Install Python on host 
+### Ubuntu in Windows sub-system (alternative for Windows users)
+Instead of Git bash and Docker, you can install a complete Ubuntu terminal environment with Windows Subsystem for Linux (WSL). Although Ubuntu can be installed in minutes, you lack the benefit of all preinstalled Python modules in an isolated container. 
+
+<ol>
+
+<li>
+
+Download and install [Ubuntu LTS on WSL2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#3-download-ubuntu)
+
+</li>
+
+<li>
+
+Install pip
+
+</li>
+
+<li>
+
+Install dependencies
+
+</li>
+
+<li>
+
+Install Jupyterlab
+
+</li>
+
+</ol>
+
+## (Optional) Install Python on host 
 In case virtualization is not possible on your host, you can [install Python](https://www.python.org/downloads/release/python-3105/) on your host. Make sure to install version 3.10.
 
 ---
