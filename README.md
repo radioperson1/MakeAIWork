@@ -84,19 +84,18 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 
 </li>
 
-<li>
-
-**Provide teachers access to your forked repository**
-
-Go to settings and add user MitwRdam as contributor.
-
-</li>
-
 </ol>
+
 ### Install Docker
 To be able to use Docker, Windows Subsystem for Linux (WSL) needs to be activated. 
 
 <ol>
+
+<li>
+
+**Check If Your Processor Supports [Virtualization](https://www.technorms.com/8208/check-if-processor-supports-virtualization)**
+
+</li>
 
 <li>
 
@@ -130,21 +129,26 @@ wsl –set-default-version 2
 
 <li>
 
-**Download and install [Docker Desktop](https://desktop.docker.com) (Windows and MacOS)**
-<br>
-Check if you are able to use Docker by running the following in <b>(git) bash</b>
-```sh
-docker run hello-world
-```
+**Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop) (Windows and MacOS)**
+
 <li>
 
-**Configure Docker Desktop to start when you login**
-
+**Configure Docker Desktop**
+Open Docker Desktop, go to settings and select
+<ul>
+<li>Start when you login</li>
+<li>Configure Docker Desktop to enable docker-compose</li>
+</ul>
+<br>
 </li>
 
 <li>
 
-**Configure Docker Desktop to enable docker-compose**
+**Test your Docker installation**
+Check if you are able to use Docker by running an example container in <b>(git) bash</b>
+```sh
+docker run hello-world
+```
 
 </li>
 
@@ -155,7 +159,7 @@ docker run hello-world
 
 <li>
 
-Install [Visual Studio Code](https://code.visualstudio.com/). 
+Install [Visual Studio Code](https://code.visualstudio.com/)
 
 </li>
 
@@ -173,13 +177,24 @@ code .
 
 <li>
 
-Install Live Share
+**Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)**
+
+</li>
+
+<li>
+
+**Install Live Share**
 
 Follow the instructions at [Collaborate with Live Share](https://code.visualstudio.com/learn/collaboration/live-share)
 
 </li>
 
 </ol>
+
+### (Optional) Install Python on host 
+In case virtualization is not possible on your host, you can [install Python](https://www.python.org/downloads/release/python-3105/) on your host. Make sure to install version 3.10.
+
+---
 
 ## Python AI Workspace Usage
 Students use a containerised Python environment running a [Docker](https://www.docker.com/) image. 
