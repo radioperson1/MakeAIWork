@@ -158,6 +158,13 @@ Check if you are able to use Docker by running an example container in <b>(git) 
 docker run hello-world
 ```
 
+If that works, test if you can run our [containerised Python AI Workspace](https://hub.docker.com/repository/docker/jaboo/miw)
+```bash
+docker run -it --rm --name python-ai-repl --entrypoint bpython jaboo/miw:latest
+```
+
+From now on, you can use the scripts to start the Docker container as described in section Python AI Workspace Usage.
+
 </li>
 
 </ol>
@@ -185,7 +192,8 @@ code .
 
 <li>
 
-**Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)**
+**Install the [Python extension](https://marketplace.visualstudio.com/items
+?itemName=ms-python.python)**
 
 </li>
 
