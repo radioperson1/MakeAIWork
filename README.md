@@ -89,15 +89,22 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 </ol>
 
 ## Enable [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)
-Enter the following command in Windows Powershell:
-```pwsh
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
 <ol>
 
 <li>
 
 **Check If Your Processor Supports [Virtualization](https://www.technorms.com/8208/check-if-processor-supports-virtualization)**
+
+</li>
+
+<li>
+
+**Enable Windows Subsystem for Linux**
+
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
 
 </li>
 
