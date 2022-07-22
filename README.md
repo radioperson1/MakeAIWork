@@ -130,13 +130,14 @@ wsl –set-default-version 2
 
 </ol>
 
-## Install Docker Desktop (Windows and MacOS)
+## Install [Docker](https://learndocker.online/introduction/the-whats-and-whys/what-is-docker/) Desktop (Windows and MacOS)
+To facilitate you with a managed portable [isolated](https://learndocker.online/introduction/the-whats-and-whys/what-are-containers/) [Development Environment]((https://learndocker.online/introduction/the-whats-and-whys/why-docker-for-devs)), we provide a Docker image in which all dependencies are preinstalled. We prefer Docker for isolation since it is a much lighter solution than [Virtual Machine](https://learndocker.online/introduction/the-whats-and-whys/containers-vs-vms/). 
 
 <ol>
 
 <li>
 
-**Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop)**
+**Download and install [Docker Desktop](https://www.docker.com/get-started)**
 
 <li>
 
