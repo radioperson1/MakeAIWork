@@ -88,7 +88,7 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 
 </ol>
 
-## Enable WSL2 (Windows only)
+## Enable [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)
 Enter the following command in Windows Powershell:
 ```pwsh
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -123,13 +123,13 @@ wsl –set-default-version 2
 
 </ol>
 
-## Install Docker (recommended)
+## Install Docker Desktop (Windows and MacOS)
 
 <ol>
 
 <li>
 
-**Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop) (Windows and MacOS)**
+**Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop)**
 
 <li>
 
