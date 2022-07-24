@@ -81,6 +81,7 @@ In order to commit and push your changes, you need identitify yourself.
 
 Open a (git)bash, enter directory MakeAIWork and run:
 ```bash
+chmod +x sh/git_config.sh
 sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
 
