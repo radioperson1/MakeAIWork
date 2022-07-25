@@ -166,7 +166,7 @@ If that works, you can run the scripts to start the Docker container as describe
 
 <li>
 
-Install [Visual Studio Code](https://code.visualstudio.com/)
+Install [Visual Studio Code](https://code.visualstudio.com)
 
 </li>
 
