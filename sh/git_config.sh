@@ -12,3 +12,5 @@ fi
 git config user.name "${argument_values[0]}"
 git config user.email "${argument_values[1]}"
 git config --list | grep user
+
+git config pull.rebase true
