@@ -23,11 +23,13 @@ function convert_paths {
     hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
 }
 
+prefix="winpty"
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
+    Linux*)     machine="Linux" && prefix="";;
+    Darwin*)    machine="Mac" && prefix="";;
+    CYGWIN*)    machine="Cygwin" && convert_paths;;
     *)          machine="UNKNOWN:${unameOut}" && convert_paths
 esac
 
@@ -51,7 +53,7 @@ composepath="docker/compose"
 case "${mode}" in
     bash*)
         entrypoint="bash"
-        cmd="winpty docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
+        cmd="${prefix} docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
             -v \"${hostdir_projects}:${containerdir_projects}\" \
             -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
             -v \"${hostdir_scripts}:${containerdir_scripts}\" \
