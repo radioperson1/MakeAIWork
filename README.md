@@ -143,11 +143,7 @@ To facilitate you with a managed portable [isolated](https://learndocker.online/
 <li>
 
 **Configure Docker Desktop**
-Open Docker Desktop, go to settings and select
-<ul>
-<li>Start when you login</li>
-<li>Configure Docker Desktop to enable docker-compose</li>
-</ul>
+Open Docker Desktop, go to settings and select <i>Start when you login</i>
 <br>
 </li>
 
