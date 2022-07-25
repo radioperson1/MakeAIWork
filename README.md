@@ -300,7 +300,7 @@ docker images
 
 The containers will be removed automatically after being terminated. For overview of both running and terminated containers enter  
 ```sh
-docker container
+docker container ls -a
 ```
 
 </li>
@@ -311,7 +311,7 @@ docker container
 Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
 Docker images and containers can be removed (if not done automatically) by running
 ```sh
-run/clean_docker_artifacts.sh
+docker/clean_docker_artifacts.sh
 ```
 
 ---
