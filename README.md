@@ -288,8 +288,12 @@ Start container with an interactive <b>bash</b> (expert mode) to perform system 
 
 ```sh
 sh/bash.sh
-```
+```  
 
+</li>
+
+</ul>
+  
 ### Docker artifacts
 Each of the above scripts will call run/miw_container.sh which will spin up a container based on the latest version of 'jaboo/miw' which is either stored locally or will be fetched from available at [Dockerhub](https://hub.docker.com/repository/docker/jaboo/miw). 
 
@@ -303,11 +307,6 @@ The containers will be removed automatically after being terminated. For overvie
 docker container ls -a
 ```
 
-</li>
-
-</ul>
-
-### Removing Docker artifacts
 Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container. 
 Docker images and containers can be removed (if not done automatically) by running
 ```sh
