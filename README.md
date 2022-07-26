@@ -12,7 +12,8 @@ Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyte
 
 ---
 
-## Python AI Workspace <i>Recommended</i> Installation
+## Python AI Workspace Installation
+Watch [instruction videos at YouTube](https://studio.youtube.com/channel/UCGBzbt5f8_AKVY9TYSEDZWw) 
 
 ### Clone the source code
 To be able to use this repository and handover your code, you need to have remote access to Github.
@@ -75,13 +76,21 @@ git clone git@github.com:{your_github_username}/MakeAIWork.git
 
 <li>
 
+**Add execution permissions to the shell scripts**
+```bash
+chmod +x sh/*.sh
+```
+
+</li>
+
+<li>
+
 **Add user to Git Config**
 
 In order to commit and push your changes, you need identitify yourself. 
 
 Open a (git)bash, enter directory MakeAIWork and run:
 ```bash
-chmod +x sh/git_config.sh
 sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
 
@@ -184,8 +193,7 @@ code .
 
 <li>
 
-**Install the [Python extension](https://marketplace.visualstudio.com/items
-?itemName=ms-python.python)**
+**Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)**
 
 </li>
 
