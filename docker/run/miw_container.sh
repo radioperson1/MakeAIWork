@@ -16,22 +16,24 @@ hostdir_notebooks="${hostdir_home}/notebooks"
 hostdir_projects="${hostdir_home}/projects"
 hostdir_scripts="${hostdir_home}/scripts"
 
-function convert_paths {
-    echo "Convert paths"
+function makeWindowsProof {
+    echo "makeWindowsProof"
     hostdir_notebooks=$(cygpath -w -p ${hostdir_notebooks})
     hostdir_projects=$(cygpath -w -p ${hostdir_projects})
     hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
+    prefix="winpty "
 }
 
-prefix="winpty "
-
+# Windows environment?
+prefix=""
 unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine="Linux" && prefix="";;
-    Darwin*)    machine="Mac" && prefix="";;
-    CYGWIN*)    machine="Cygwin" && convert_paths;;
-    NT*)        machine="Git Bash" && convert_paths;;
-    *)          machine="UNKNOWN:${unameOut}" && convert_paths
+os="${unameOut:0:7}"
+case "${os}" in
+    Linux*)     machine="Linux";;
+    Darwin*)    machine="Mac";;
+    CYGWIN*)    machine="Cygwin" && makeWindowsProof;;
+    MINGW*)     machine="Git Bash" && makeWindowsProof;;
+    *)          machine="UNKNOWN:${os}"
 esac
 
 export HOSTPATH_NOTEBOOKS=${hostdir_notebooks}
