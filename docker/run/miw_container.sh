@@ -63,14 +63,14 @@ case "${mode}" in
             ${image}";;        
     jupyter*)     
         composefile="${composepath}/python-ai-notebook.yaml"
-        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up --force-recreate";;
+        cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entrypoint="bpython"
         cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
     python-script*)
         composefile="${composepath}/python-ai-script.yaml"
         export SCRIPT="${argument_values[1]}"
-        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up --force-recreate";;
+        cmd="docker/compose/up.sh ${composefile}";;
     *)      
         cmd="${prefix}docker run --rm --name ${containername} ${image}";;        
 esac
