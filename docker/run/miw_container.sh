@@ -23,13 +23,14 @@ function convert_paths {
     hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
 }
 
-prefix="winpty"
+prefix="winpty "
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     machine="Linux" && prefix="";;
     Darwin*)    machine="Mac" && prefix="";;
     CYGWIN*)    machine="Cygwin" && convert_paths;;
+    NT*)        machine="Git Bash" && convert_paths;;
     *)          machine="UNKNOWN:${unameOut}" && convert_paths
 esac
 
@@ -53,7 +54,7 @@ composepath="docker/compose"
 case "${mode}" in
     bash*)
         entrypoint="bash"
-        cmd="${prefix} docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
+        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
             -v \"${hostdir_projects}:${containerdir_projects}\" \
             -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
             -v \"${hostdir_scripts}:${containerdir_scripts}\" \
@@ -63,16 +64,16 @@ case "${mode}" in
         cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
     python-repl*)
         entrypoint="bpython"
-        cmd="winpty docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
+        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
     python-script*)
         composefile="${composepath}/python-ai-script.yaml"
         export SCRIPT="${argument_values[1]}"
         cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
     *)      
-        cmd="winpty docker run --rm --name ${containername} ${image}";;        
+        cmd="${prefix}docker run --rm --name ${containername} ${image}";;        
 esac
 
 export IMAGE=${image}
 
-echo ${cmd}
+printf "%s cmd : %s\n" "$0" "${cmd}"
 eval ${cmd}

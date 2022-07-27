@@ -17,6 +17,6 @@ if (! command -v ${runnable} &> /dev/null) then
 
 fi
 
+printf "%s cmd : %s\n" "$0" "${cmd}"
 echo "Open the URL in your browser"
-echo "$cmd"
 eval ${cmd} | grep -Eo 'http://127.0.0.1:8888/lab\?.*'
