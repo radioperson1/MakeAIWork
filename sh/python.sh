@@ -3,8 +3,8 @@
 argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
-cmd_repl="docker/run/miw_container.sh python-script"  
-cmd_script="docker/run/miw_container.sh python-repl"  
+cmd_scrip"docker/run/miw_container.sh python-script"  
+cmd_repl="docker/run/miw_container.sh python-repl"  
 
 # No docker?
 if (! command -v "docker" &> /dev/null ) then
@@ -19,6 +19,7 @@ if [ $nr_of_arguments -gt 0 ]; then
   printf "Run with script %s\n" ${script}
   cmd="${cmd_script} ${script}"  
 else
+  echo "Start bpython"
   cmd=${cmd_repl}  
 fi
 
@@ -27,5 +28,5 @@ if (! command -v ${cmd} &> /dev/null ) then
   exit -1
 fi
 
-echo ${cmd}
+printf "%s cmd : %s\n" "$0" "${cmd}"
 eval ${cmd}

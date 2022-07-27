@@ -16,21 +16,24 @@ hostdir_notebooks="${hostdir_home}/notebooks"
 hostdir_projects="${hostdir_home}/projects"
 hostdir_scripts="${hostdir_home}/scripts"
 
-function convert_paths {
-    echo "Convert paths"
+function makeWindowsProof {
+    echo "makeWindowsProof"
     hostdir_notebooks=$(cygpath -w -p ${hostdir_notebooks})
     hostdir_projects=$(cygpath -w -p ${hostdir_projects})
     hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
+    prefix="winpty "
 }
 
-prefix="winpty"
-
+# Windows environment?
+prefix=""
 unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine="Linux" && prefix="";;
-    Darwin*)    machine="Mac" && prefix="";;
-    CYGWIN*)    machine="Cygwin" && convert_paths;;
-    *)          machine="UNKNOWN:${unameOut}" && convert_paths
+os="${unameOut:0:7}"
+case "${os}" in
+    Linux*)     machine="Linux";;
+    Darwin*)    machine="Mac";;
+    CYGWIN*)    machine="Cygwin" && makeWindowsProof;;
+    MINGW*)     machine="Git Bash" && makeWindowsProof;;
+    *)          machine="UNKNOWN:${os}"
 esac
 
 export HOSTPATH_NOTEBOOKS=${hostdir_notebooks}
@@ -53,26 +56,26 @@ composepath="docker/compose"
 case "${mode}" in
     bash*)
         entrypoint="bash"
-        cmd="${prefix} docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
+        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
             -v \"${hostdir_projects}:${containerdir_projects}\" \
             -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
             -v \"${hostdir_scripts}:${containerdir_scripts}\" \
             ${image}";;        
     jupyter*)     
         composefile="${composepath}/python-ai-notebook.yaml"
-        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
+        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up --force-recreate";;
     python-repl*)
         entrypoint="bpython"
-        cmd="winpty docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
+        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
     python-script*)
         composefile="${composepath}/python-ai-script.yaml"
         export SCRIPT="${argument_values[1]}"
-        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up";;
+        cmd="docker-compose -f ${composefile} down; docker-compose -f ${composefile} up --force-recreate";;
     *)      
-        cmd="winpty docker run --rm --name ${containername} ${image}";;        
+        cmd="${prefix}docker run --rm --name ${containername} ${image}";;        
 esac
 
 export IMAGE=${image}
 
-echo ${cmd}
+printf "%s cmd : %s\n" "$0" "${cmd}"
 eval ${cmd}
