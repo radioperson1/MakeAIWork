@@ -85,7 +85,7 @@ chmod +x sh/*.sh
 
 <li>
 
-**Add user to Git Config**
+**Configure git**
 
 In order to commit and push your changes, you need identitify yourself. 
 
@@ -93,16 +93,30 @@ Open a (git)bash, enter directory MakeAIWork and run:
 ```bash
 sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
+This script will also set the [pull policy](https://www.git-scm.com/docs/git-pull) to rebase.
 
 </li>
 
 <li>
 
-**Keep your fork repository up-todate by regularly merging changes from the original upstream repository**
+**Add upstream to original remote repository (Optional)**
+
+To be able to fetch and merge changes from this repository using (bash) commands, you need to add it as a (second) upstream.  
+
 ```bash
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
-git pull mitwrdam main
-git commit -m "Merge branch 'main' of https://github.com/MitwRdam/MakeAIWork"
+```
+
+Keep your fork repository up-todate by regularly merging changes from the original remote repository into your local fork..
+
+```bash
+git fetch mitwrdam main
+```
+
+and commit and push the changes to you remote fork 
+
+```bash
+git commit -m "Merge branch 'main' of https://github.com/MitwRdam/MakeAIWork" && git push
 ```
 
 </li>
