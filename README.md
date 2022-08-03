@@ -15,7 +15,7 @@ Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyte
 ## Python AI Workspace Installation
 Watch [instruction videos at YouTube](https://studio.youtube.com/channel/UCGBzbt5f8_AKVY9TYSEDZWw) 
 
-### Clone the source code
+### Clone this Git repository
 To be able to use this repository and handover your code, you need to have remote access to Github.
 
 <ol>
@@ -100,7 +100,7 @@ chmod +x sh/*.sh
 
 <li>
 
-**Add user to Git Config**
+**Configure git**
 
 In order to commit and push your changes, you need identitify yourself. 
 
@@ -108,12 +108,37 @@ Open a (git)bash, enter directory MakeAIWork and run:
 ```bash
 sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
+This script will also set the [pull policy](https://www.git-scm.com/docs/git-pull) to rebase.
+
+</li>
+
+<li>
+
+**Add upstream to original remote repository (Optional)**
+
+To be able to fetch and merge changes from this repository using (bash) commands, you need to add it as a (second) upstream.  
+
+```bash
+git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
+```
+
+Keep your fork repository up-todate by regularly merging changes from the original remote repository into your local fork..
+
+```bash
+git fetch mitwrdam main
+```
+
+and commit and push the changes to you remote fork 
+
+```bash
+git commit -m "Merge branch 'main' of https://github.com/MitwRdam/MakeAIWork" && git push
+```
 
 </li>
 
 </ol>
 
-## Enable [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)
+### Enable [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)
 <ol>
 
 <li>
@@ -155,7 +180,7 @@ wsl –set-default-version 2
 
 </ol>
 
-## Install [Docker](https://learndocker.online/introduction/the-whats-and-whys/what-is-docker/) Desktop (Windows and MacOS)
+### Install [Docker](https://learndocker.online/introduction/the-whats-and-whys/what-is-docker/) Desktop (Windows and MacOS)
 To facilitate you with a managed portable [isolated](https://learndocker.online/introduction/the-whats-and-whys/what-are-containers/) [Development Environment]((https://learndocker.online/introduction/the-whats-and-whys/why-docker-for-devs)), we provide a Docker image in which all dependencies are preinstalled. We prefer Docker for isolation since it is a much lighter solution than [Virtual Machine](https://learndocker.online/introduction/the-whats-and-whys/containers-vs-vms/). 
 
 <ol>
@@ -185,7 +210,7 @@ If that works, you can run the scripts to start the Docker container as describe
 
 </ol>
 
-## Edit with Visual Studio Code
+### Edit with Visual Studio Code
 <ol>
 
 <li>
@@ -252,9 +277,6 @@ Install Jupyterlab
 </li>
 
 </ol>
-
-## (Optional) Install Python on host 
-In case virtualization is not possible on your host, you can [install Python](https://www.python.org/downloads/release/python-3105/) on your host. Make sure to install version 3.10.
 
 ---
 
