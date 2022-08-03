@@ -122,16 +122,16 @@ To be able to fetch and merge changes from this repository using (bash) commands
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
 ```
 
-Keep your fork repository up-todate by regularly merging changes from the original remote repository into your local fork..
+Keep your fork repository up-todate by regularly pulling changes from the original remote repository into your local fork..
 
 ```bash
-git fetch mitwrdam main
+ git pull mitwrdam main
 ```
 
-and commit and push the changes to you remote fork 
+and push the changes to you remote fork 
 
 ```bash
-git commit -m "Merge branch 'main' of https://github.com/MitwRdam/MakeAIWork" && git push
+git push
 ```
 
 </li>
