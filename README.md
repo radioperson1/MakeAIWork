@@ -28,10 +28,25 @@ To be able to use this repository and handover your code, you need to have remot
 
 <li>
 
-**Install [Git for Windows](https://gitforwindows.org/) (Recommended for Windows users)**
-Make sure you select "Checkout as-is, commit Unix-style line endings"
+**Install Git**
+
+Make sure you select "Checkout as-is, commit Unix-style line endings" during the installation process. 
+
+<ul>
+
+<li>
+
+[Git for Windows](https://gitforwindows.org/)**
 
 </li>
+
+<li>
+
+[Git for Mac](https://git-scm.com/download/mac)
+
+</li>
+
+</ul>
 
 <li>
 
@@ -107,16 +122,16 @@ To be able to fetch and merge changes from this repository using (bash) commands
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
 ```
 
-Keep your fork repository up-todate by regularly merging changes from the original remote repository into your local fork..
+Keep your fork repository up-todate by regularly pulling changes from the original remote repository into your local fork..
 
 ```bash
-git fetch mitwrdam main
+ git pull mitwrdam main
 ```
 
-and commit and push the changes to you remote fork 
+and push the changes to you remote fork 
 
 ```bash
-git commit -m "Merge branch 'main' of https://github.com/MitwRdam/MakeAIWork" && git push
+git push
 ```
 
 </li>
