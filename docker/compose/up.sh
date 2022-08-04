@@ -10,5 +10,6 @@ compose_file=$1
 
 docker-compose -f ${compose_file} down
 
-cmd="docker-compose -f ${compose_file} up --remove-orphans"
+cmd="docker-compose -f ${compose_file} up --remove-orphans &"
 printf "%s cmd : %s\n" "$0" "${cmd}"
+eval ${cmd}

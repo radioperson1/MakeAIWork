@@ -18,5 +18,10 @@ if (! command -v ${runnable} &> /dev/null) then
 fi
 
 printf "%s cmd : %s\n" "$0" "${cmd}"
-echo "Open the URL in your browser"
-eval ${cmd} | grep -Eo 'http://127.0.0.1:8888/lab\?.*'
+
+eval ${cmd} > log.txt
+sleep 5s;
+url=$(cat log.txt | grep -Eo 'http://127.0.0.1:8888/lab\?.*' | tail -n1)
+rm log.txt
+printf "Open %s in your browser\n" "${url}"
+python -m webbrowser ${url}

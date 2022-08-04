@@ -4,7 +4,7 @@ services:
   python-script:
     image: $IMAGE
     entrypoint: 
-      - ptpython
+      - python
       - ${SCRIPT}
     volumes:
       - ${HOSTPATH_PROJECT}:/home/student/projects
