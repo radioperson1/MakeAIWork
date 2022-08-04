@@ -19,7 +19,7 @@ if [ $nr_of_arguments -gt 0 ]; then
   printf "Run with script %s\n" ${script}
   cmd="${cmd_script} ${script}"  
 else
-  echo "Start bpython"
+  echo "Start ptpython"
   cmd=${cmd_repl}  
 fi
 

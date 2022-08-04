@@ -66,7 +66,7 @@ case "${mode}" in
             ${graphicsParams} --entrypoint ${entryPoint} ${image}";;
     jupyter*)     
         composefile="${composepath}/python-ai-notebook.yaml"
-        cmd="docker/compose/up.sh ${composefile}";;
+        cmd="docker/compose/up.sh ${composefile} 0";;
     python-repl*)
         entryPoint="ptpython"
         cmd="${prefix}docker run -it --rm --name ${containerName} --entrypoint ${entryPoint} ${image}";;        
