@@ -3,7 +3,7 @@
 argument_values=("$@")
 nr_of_arguments=${#argument_values[@]}
 
-cmd_scrip"docker/run/miw_container.sh python-script"  
+cmd_script="docker/run/miw_container.sh python-script"  
 cmd_repl="docker/run/miw_container.sh python-repl"  
 
 # No docker?

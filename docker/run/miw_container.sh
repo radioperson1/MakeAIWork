@@ -46,33 +46,36 @@ mode="${argument_values[0]}"
 
 name="jaboo/miw"
 image="${name}:latest"
-containername="python-ai-${mode}"
-container_home="/home/student"
-containerdir_notebooks="${container_home}/notebooks"
-containerdir_projects="${container_home}/projects"
-containerdir_scripts="${container_home}/scripts"
+containerName="python-ai-${mode}"
+containerHome="/home/student"
+containerdir_notebooks="${containerHome}/notebooks"
+containerdir_projects="${containerHome}/projects"
+containerdir_scripts="${containerHome}/scripts"
 composepath="docker/compose"
+graphicsParams="-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --net=host"
 
 case "${mode}" in
     bash*)
-        entrypoint="bash"
-        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} \
+        entryPoint="bash"
+        cmd="${prefix}docker run -it --rm --name ${containerName} \
             -v \"${hostdir_projects}:${containerdir_projects}\" \
             -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
             -v \"${hostdir_scripts}:${containerdir_scripts}\" \
-            ${image}";;        
+            -v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 \
+            ${graphicsParams} --entrypoint ${entryPoint} ${image}";;
     jupyter*)     
         composefile="${composepath}/python-ai-notebook.yaml"
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
-        entrypoint="bpython"
-        cmd="${prefix}docker run -it --rm --name ${containername} --entrypoint ${entrypoint} ${image}";;        
+        entryPoint="ptpython"
+        cmd="${prefix}docker run -it --rm --name ${containerName} --entrypoint ${entryPoint} ${image}";;        
     python-script*)
         composefile="${composepath}/python-ai-script.yaml"
         export SCRIPT="${argument_values[1]}"
         cmd="docker/compose/up.sh ${composefile}";;
+    # Default
     *)      
-        cmd="${prefix}docker run --rm --name ${containername} ${image}";;        
+        cmd="${prefix}docker run --rm --name ${containerName} ${image}";;        
 esac
 
 export IMAGE=${image}

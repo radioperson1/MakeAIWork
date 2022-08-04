@@ -3,9 +3,8 @@ version: '3'
 services:
   python-script:
     image: $IMAGE
-    tty: false    
     entrypoint: 
-      - python
+      - ptpython
       - ${SCRIPT}
     volumes:
       - ${HOSTPATH_PROJECT}:/home/student/projects
