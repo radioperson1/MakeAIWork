@@ -45,7 +45,8 @@ export HOSTPATH_SCRIPTS=${hostdir_scripts}
 mode="${argument_values[0]}"
 
 name="jaboo/miw"
-image="${name}:latest"
+version="0.7"
+image="${name}:${version}"
 containerName="python-ai-${mode}"
 containerHome="/home/student"
 containerdir_notebooks="${containerHome}/notebooks"
