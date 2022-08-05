@@ -19,9 +19,14 @@ fi
 
 printf "%s cmd : %s\n" "$0" "${cmd}"
 
-eval ${cmd} > log.txt
+eval ${cmd}
 sleep 5s;
+docker logs compose_python-ai-jupyter_1 2> log.txt
 url=$(cat log.txt | grep -Eo 'http://127.0.0.1:8888/lab\?.*' | tail -n1)
-rm log.txt
-printf "Open %s in your browser\n" "${url}"
-python -m webbrowser ${url}
+
+# Check if url is non-empty
+if [ "$url" != "" ]; then
+    rm log.txt
+    printf "Open %s in your browser\n" "${url}"
+    python -m webbrowser ${url}
+fi
