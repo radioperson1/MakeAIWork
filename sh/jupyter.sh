@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-cmd="docker/run/miw_container.sh jupyter"
 runnable="docker"
+containerName="python-ai-jupyter"
+cmd="docker/run/miw_container.sh jupyter"
 
 # No docker?
 if (! command -v ${runnable} &> /dev/null) then
@@ -17,6 +18,16 @@ if (! command -v ${runnable} &> /dev/null) then
 
 fi
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
-echo "Open the URL in your browser"
-eval ${cmd} | grep -Eo 'http://127.0.0.1:8888/lab\?.*'
+# printf "%s cmd : %s\n" "$0" "${cmd}"
+
+eval ${cmd}
+sleep 5s;
+docker logs ${containerName} 2> log.txt
+url=$(cat log.txt | grep -Eo 'http://127.0.0.1:8888/lab\?.*' | tail -n1)
+
+# Check if url is non-empty
+if [ "$url" != "" ]; then
+    rm log.txt
+    printf "Open %s in your browser\n" "${url}"
+    python -m webbrowser ${url}
+fi

@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
-argument_values=("$@")
-nr_of_arguments=${#argument_values[@]}
+argumentValues=("$@")
+nrOfArguments=${#argumentValues[@]}
 
-cmd_script="docker/run/miw_container.sh python-script"  
-cmd_repl="docker/run/miw_container.sh python-repl"  
+cmdScript="docker/run/miw_container.sh python-script"  
+cmdRepl="docker/run/miw_container.sh python-repl"  
 
 # No docker?
 if (! command -v "docker" &> /dev/null ) then
   echo Try locally installed python
-  cmd_repl="bpython"
-  cmd_script="python"
+  cmdRepl="bpython"
+  cmdScript="python"
 fi
 
 # Run with script?
-if [ $nr_of_arguments -gt 0 ]; then
-  script="${argument_values[0]}"
+if [ $nrOfArguments -gt 0 ]; then
+  script="${argumentValues[0]}"
   printf "Run with script %s\n" ${script}
-  cmd="${cmd_script} ${script}"  
+  cmd="${cmdScript} ${script}"  
 else
-  echo "Start bpython"
-  cmd=${cmd_repl}  
+  echo "Start ptpython"
+  cmd=${cmdRepl}  
 fi
 
 if (! command -v ${cmd} &> /dev/null ) then 
@@ -28,5 +28,5 @@ if (! command -v ${cmd} &> /dev/null ) then
   exit -1
 fi
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
+# printf "%s cmd : %s\n" "$0" "${cmd}"
 eval ${cmd}

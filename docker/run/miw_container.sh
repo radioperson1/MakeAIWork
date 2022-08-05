@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-argument_names=("mode" "[script]")
-argument_values=("$@")
-nr_of_arguments=${#argument_values[@]}
+argumentNames=("mode" "[script]")
+argumentValues=("$@")
+nrOfArguments=${#argumentValues[@]}
 
-if [ $nr_of_arguments -lt 1 ]; then
-    printf "USAGE: %s %s\n" "$0" "${argument_names[*]}"
+if [ $nrOfArguments -lt 1 ]; then
+    printf "USAGE: %s %s\n" "$0" "${argumentNames[*]}"
     exit 1;
 fi
 
 # Host
 
-hostdir_home="${PWD}"
-hostdir_notebooks="${hostdir_home}/notebooks"
-hostdir_projects="${hostdir_home}/projects"
-hostdir_scripts="${hostdir_home}/scripts"
+hostdirHome="${PWD}"
+hostdirNotebooks="${hostdirHome}/notebooks"
+hostdirPics="${hostdirHome}/pics"
+hostdirProjects="${hostdirHome}/projects"
+hostdirScripts="${hostdirHome}/scripts"
 
 function makeWindowsProof {
-    echo "makeWindowsProof"
-    hostdir_notebooks=$(cygpath -w -p ${hostdir_notebooks})
-    hostdir_projects=$(cygpath -w -p ${hostdir_projects})
-    hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
+    hostdirNotebooks=$(cygpath -w -p ${hostdirNotebooks})
+    hostdirProjects=$(cygpath -w -p ${hostdirProjects})
+    hostdirPics=$(cygpath -w -p ${hostdirPics})
+    hostdirScripts=$(cygpath -w -p ${hostdirScripts})
     prefix="winpty "
 }
 
@@ -36,50 +37,55 @@ case "${os}" in
     *)          machine="UNKNOWN:${os}"
 esac
 
-export HOSTPATH_NOTEBOOKS=${hostdir_notebooks}
-export HOSTPATH_PROJECT=${hostdir_projects}
-export HOSTPATH_SCRIPTS=${hostdir_scripts}
+export HOSTPATH_NOTEBOOKS=${hostdirNotebooks}
+export HOSTPATH_PICS=${hostdirPics}
+export HOSTPATH_PROJECT=${hostdirProjects}
+export HOSTPATH_SCRIPTS=${hostdirScripts}
 
 # Container
 
-mode="${argument_values[0]}"
+mode="${argumentValues[0]}"
 
 name="jaboo/miw"
-version="0.7"
+version="0.8"
 image="${name}:${version}"
 containerName="python-ai-${mode}"
 containerHome="/home/student"
-containerdir_notebooks="${containerHome}/notebooks"
-containerdir_projects="${containerHome}/projects"
-containerdir_scripts="${containerHome}/scripts"
-composepath="docker/compose"
-graphicsParams="-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --net=host"
+containerdirNotebooks="${containerHome}/notebooks"
+containerdirProjects="${containerHome}/projects"
+containerdirPics="${containerHome}/pics"
+containerdirScripts="${containerHome}/scripts"
+composePath="docker/compose"
+graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=$DISPLAY\" --net=host"
+
+cmd="${prefix}docker run -it --rm --name ${containerName}"
+cmd="${cmd} -v \"${hostdirNotebooks}:${containerdirNotebooks}\""
+cmd="${cmd} -v \"${hostdirPics}:${containerdirPics}\""
+cmd="${cmd} -v \"${hostdirProjects}:${containerdirProjects}\""
+cmd="${cmd} -v \"${hostdirScripts}:${containerdirScripts}\""
+cmd="${cmd} ${graphicsParams} --entrypoint ${entryPoint} ${image}"
 
 case "${mode}" in
     bash*)
         entryPoint="bash"
-        cmd="${prefix}docker run -it --rm --name ${containerName} \
-            -v \"${hostdir_projects}:${containerdir_projects}\" \
-            -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
-            -v \"${hostdir_scripts}:${containerdir_scripts}\" \
-            -v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 \
-            ${graphicsParams} --entrypoint ${entryPoint} ${image}";;
+        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
     jupyter*)     
-        composefile="${composepath}/python-ai-notebook.yaml"
+        composefile="${composePath}/python-ai-jupyter.yaml"
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entryPoint="ptpython"
-        cmd="${prefix}docker run -it --rm --name ${containerName} --entrypoint ${entryPoint} ${image}";;        
+        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;        
     python-script*)
-        composefile="${composepath}/python-ai-script.yaml"
-        export SCRIPT="${argument_values[1]}"
-        cmd="docker/compose/up.sh ${composefile}";;
+        entryPoint="run_script"
+        cmd="${cmd} -e SCRIPT=\"${argumentValues[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
     *)      
         cmd="${prefix}docker run --rm --name ${containerName} ${image}";;        
 esac
 
+# Set environment variables for Docker
 export IMAGE=${image}
+export CONTAINER_NAME=${containerName}
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
+# printf "%s cmd : \n%s\n" "$0" "${cmd}"
 eval ${cmd}
