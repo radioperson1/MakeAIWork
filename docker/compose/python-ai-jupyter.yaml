@@ -9,4 +9,5 @@ services:
       - 8888:8888
     tty: false    
     volumes:
-      - ${HOSTPATH_NOTEBOOKS}:/home/student/notebooks      
+      - ${HOSTPATH_NOTEBOOKS}:/home/student/notebooks
+      - ${HOSTPATH_PICS}:/home/student/pics
