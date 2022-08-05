@@ -9,8 +9,8 @@ if [ $# -eq 0 ]
     exit -1
 fi
 
-compose_file=$1
+composeFile="$1"
 
-cmd="docker-compose -f ${compose_file} down && docker-compose -f ${compose_file} up${mode} --remove-orphans"
-printf "%s cmd : \n%s\n" "$0" "${cmd}"
+cmd="docker-compose -f ${composeFile} down && docker-compose -f ${composeFile} up${mode} --remove-orphans"
+# printf "%s cmd : \n%s\n" "$0" "${cmd}"
 eval ${cmd}

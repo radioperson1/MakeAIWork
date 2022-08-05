@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-cmd="docker/run/miw_container.sh jupyter"
 runnable="docker"
+containerName="python-ai-jupyter"
+cmd="docker/run/miw_container.sh jupyter"
 
 # No docker?
 if (! command -v ${runnable} &> /dev/null) then
@@ -17,11 +18,11 @@ if (! command -v ${runnable} &> /dev/null) then
 
 fi
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
+# printf "%s cmd : %s\n" "$0" "${cmd}"
 
 eval ${cmd}
 sleep 5s;
-docker logs compose_python-ai-jupyter_1 2> log.txt
+docker logs ${containerName} 2> log.txt
 url=$(cat log.txt | grep -Eo 'http://127.0.0.1:8888/lab\?.*' | tail -n1)
 
 # Check if url is non-empty
