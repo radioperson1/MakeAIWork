@@ -17,7 +17,6 @@ hostdir_projects="${hostdir_home}/projects"
 hostdir_scripts="${hostdir_home}/scripts"
 
 function makeWindowsProof {
-    echo "makeWindowsProof"
     hostdir_notebooks=$(cygpath -w -p ${hostdir_notebooks})
     hostdir_projects=$(cygpath -w -p ${hostdir_projects})
     hostdir_scripts=$(cygpath -w -p ${hostdir_scripts})
@@ -53,26 +52,29 @@ containerdir_notebooks="${containerHome}/notebooks"
 containerdir_projects="${containerHome}/projects"
 containerdir_scripts="${containerHome}/scripts"
 composepath="docker/compose"
-graphicsParams="-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --net=host"
+graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=$DISPLAY\" --net=host"
 
 case "${mode}" in
     bash*)
         entryPoint="bash"
-        cmd="${prefix}docker run -it --rm --name ${containerName} \
-            -v \"${hostdir_projects}:${containerdir_projects}\" \
-            -v \"${hostdir_notebooks}:${containerdir_notebooks}\" \
-            -v \"${hostdir_scripts}:${containerdir_scripts}\" \
-            -v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 \
-            ${graphicsParams} --entrypoint ${entryPoint} ${image}";;
+        cmd="${prefix}docker run -it --rm --name ${containerName}"
+        cmd="${cmd} -v \"${hostdir_projects}:${containerdir_projects}\""
+        cmd="${cmd} -v \"${hostdir_notebooks}:${containerdir_notebooks}\""
+        cmd="${cmd} -v \"${hostdir_scripts}:${containerdir_scripts}\""
+        cmd="${cmd} ${graphicsParams} --entrypoint ${entryPoint} ${image}";;
     jupyter*)     
         composefile="${composepath}/python-ai-notebook.yaml"
-        cmd="docker/compose/up.sh ${composefile} 0";;
+        cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entryPoint="ptpython"
         cmd="${prefix}docker run -it --rm --name ${containerName} --entrypoint ${entryPoint} ${image}";;        
     python-script*)
-        composefile="${composepath}/python-ai-script.yaml"        
-        cmd="export SCRIPT='${argument_values[1]}' && docker/compose/up.sh ${composefile}";;
+        entryPoint="run_script"
+        cmd="${prefix}docker run -it --rm --name ${containerName}"
+        cmd="${cmd} -v \"${hostdir_projects}:${containerdir_projects}\""
+        cmd="${cmd} -v \"${hostdir_notebooks}:${containerdir_notebooks}\""
+        cmd="${cmd} -v \"${hostdir_scripts}:${containerdir_scripts}\""
+        cmd="${cmd} ${graphicsParams} -e SCRIPT=\"${argument_values[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
     *)      
         cmd="${prefix}docker run --rm --name ${containerName} ${image}";;        
@@ -82,5 +84,5 @@ esac
 export IMAGE=${image}
 export CONTAINER_NAME=${containerName}
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
+printf "%s cmd : \n%s\n" "$0" "${cmd}"
 eval ${cmd}
