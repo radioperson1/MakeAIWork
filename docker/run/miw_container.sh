@@ -71,15 +71,16 @@ case "${mode}" in
         entryPoint="ptpython"
         cmd="${prefix}docker run -it --rm --name ${containerName} --entrypoint ${entryPoint} ${image}";;        
     python-script*)
-        composefile="${composepath}/python-ai-script.yaml"
-        export SCRIPT="${argument_values[1]}"
-        cmd="docker/compose/up.sh ${composefile}";;
+        composefile="${composepath}/python-ai-script.yaml"        
+        cmd="export SCRIPT='${argument_values[1]}' && docker/compose/up.sh ${composefile}";;
     # Default
     *)      
         cmd="${prefix}docker run --rm --name ${containerName} ${image}";;        
 esac
 
+# Set environment variables for Docker
 export IMAGE=${image}
+export CONTAINER_NAME=${containerName}
 
 printf "%s cmd : %s\n" "$0" "${cmd}"
 eval ${cmd}
