@@ -210,7 +210,7 @@ If that works, you can run the scripts to start the Docker container as describe
 
 <li>
 
-**Install Python**
+**Install Python (Windows only)**
 Although we use Docker as the Python workspace, we also install [python](https://www.python.org/downloads/release/python-3105/) on our host to be able to automatically start the webbrowser after Jupyter has been started.
 
 </li>
