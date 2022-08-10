@@ -10,7 +10,7 @@ cmdRepl="docker/run/miw_container.sh python-repl"
 if (! command -v "docker" &> /dev/null ) then
   echo Try locally installed python
   cmdRepl="ptpython"
-  cmdScript="python"
+  cmdScript="ptpython"
 fi
 
 # Run with script?
