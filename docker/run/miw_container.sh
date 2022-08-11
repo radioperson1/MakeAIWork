@@ -4,6 +4,12 @@ argumentNames=("mode" "[script]")
 argumentValues=("$@")
 nrOfArguments=${#argumentValues[@]}
 
+#  Image
+
+name="jaboo/miw"
+version="0.9"
+image="${name}:${version}"
+
 if [ $nrOfArguments -lt 1 ]; then
     printf "USAGE: %s %s\n" "$0" "${argumentNames[*]}"
     exit 1;
@@ -46,9 +52,6 @@ export HOSTPATH_SCRIPTS=${hostdirScripts}
 
 mode="${argumentValues[0]}"
 
-name="jaboo/miw"
-version="0.8"
-image="${name}:${version}"
 containerName="python-ai-${mode}"
 containerHome="/home/student"
 containerdirNotebooks="${containerHome}/notebooks"
@@ -56,21 +59,24 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
-graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=$DISPLAY\" --net=host"
+graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${DISPLAY}\" --net=host"
 
 cmd="${prefix}docker run -it --rm --name ${containerName}"
 cmd="${cmd} -v \"${hostdirNotebooks}:${containerdirNotebooks}\""
 cmd="${cmd} -v \"${hostdirPics}:${containerdirPics}\""
 cmd="${cmd} -v \"${hostdirProjects}:${containerdirProjects}\""
 cmd="${cmd} -v \"${hostdirScripts}:${containerdirScripts}\""
-cmd="${cmd} ${graphicsParams} --entrypoint ${entryPoint} ${image}"
+cmd="${cmd} ${graphicsParams}"
 
 case "${mode}" in
     bash*)
         entryPoint="bash"
         cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
-    jupyter*)     
+    jupyter*)
+        version="latest"     
         composefile="${composePath}/python-ai-jupyter.yaml"
+        export IMAGE=${image}
+        export CONTAINER_NAME=${containerName}
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entryPoint="ptpython"
@@ -80,12 +86,8 @@ case "${mode}" in
         cmd="${cmd} -e SCRIPT=\"${argumentValues[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
     *)      
-        cmd="${prefix}docker run --rm --name ${containerName} ${image}";;        
+        cmd=" ${image}";;        
 esac
-
-# Set environment variables for Docker
-export IMAGE=${image}
-export CONTAINER_NAME=${containerName}
 
 printf "%s cmd : \n\t%s\n\n" "$0" "${cmd}"
 eval ${cmd}
