@@ -87,5 +87,5 @@ esac
 export IMAGE=${image}
 export CONTAINER_NAME=${containerName}
 
-# printf "%s cmd : \n%s\n" "$0" "${cmd}"
+printf "%s cmd : \n\t%s\n\n" "$0" "${cmd}"
 eval ${cmd}

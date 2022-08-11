@@ -17,16 +17,16 @@ if (! command -v ${runnable} &> /dev/null) then
     fi
 fi
 
-printf "%s cmd : %s\n" "$0" "${cmd}"
+printf "%s cmd : \n\t%s\n\n" "$0" "${cmd}"
 eval ${cmd}
 
-if (${runnable} -eq "docker") then
-    sleep 5s;
+if [[ "${runnable}" == "docker" ]]; then
+    sleep 5;
     docker logs ${containerName} 2> log.txt
     url=$(cat log.txt | grep -Eo 'http://127.0.0.1:8888/lab\?.*' | tail -n1)
 
     # Check if url is non-empty
-    if [ "$url" != "" ]; then
+    if [ "${url}" != "" ]; then
         rm log.txt
         printf "Open %s in your browser\n" "${url}"
         python -m webbrowser ${url}
