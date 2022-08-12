@@ -86,7 +86,7 @@ case "${mode}" in
         cmd="${cmd} -e SCRIPT=\"${argumentValues[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
     *)      
-        cmd=" ${image}";;        
+        cmd="${cmd} ${image}";;        
 esac
 
 printf "%s cmd : \n\t%s\n\n" "$0" "${cmd}"
