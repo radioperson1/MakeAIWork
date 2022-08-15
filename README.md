@@ -228,7 +228,15 @@ Install [Visual Studio Code](https://code.visualstudio.com)
 
 <li>
 
-Start vscode with command from current directory.
+**Enable VSCode to be opened from the command line (macOS only)**
+
+In VSCode, open the Command Palette and type 'shell command' in order to select the Shell command: Install ‘code’ command in PATH
+
+</li>
+
+<li>
+
+**Start vscode with command from current directory**
 
 Start a (git) bash shell and enter directory MakeAIWork, from there use the command <i>code</i> to start vscode.
 ```sh
