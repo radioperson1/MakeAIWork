@@ -24,7 +24,7 @@ To be able to use this repository and handover your code, you need to have remot
 
 **Create an account at [Github](https://github.com)**
 
-</li>
+</li><br>
 
 <li>
 
@@ -44,7 +44,7 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 [Git for Mac](https://git-scm.com/download/mac)
 
-</li>
+</li><br>
 
 </ul>
 
@@ -58,7 +58,7 @@ Start a (git) bash shell *and generate a secret key pair with your student email
 ssh-keygen -t Ed25519 -C {your@student.email.com}
 ```
 
-</li>
+</li><br>
 
 <li>
 
@@ -70,15 +70,33 @@ cat ~/.ssh/id_ed25519.pub
 ```
 and copy this in the text area when adding a [new ssh key in GitHub](https://github.com/settings/ssh/new)
 
-</li>
+</li><br>
 
-</li>
+<li>
+
+**(Optional) Install [GitHub client](https://cli.github.com/) (MacOS and Linux)**
+
+```bash
+brew install gh
+```
+
+</li><br>
+
+<li>
 
 **Create a fork of this repository** 
 
-</li>
+Create a fork of MitwRdam/MakeAIWork in [GitHub](https://github.com/MitwRdam/MakeAIWork) or 
+use the GitHub Client by entering the following commands in your terminal
 
-</li>
+```bash
+gh auth login
+gh repo fork https://github.com/MitwRdam/MakeAIWork
+```
+
+</li><br>
+
+<li>
 
 **Clone your <b>fork</b>**
 
@@ -110,13 +128,14 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
 This script will also set the [pull policy](https://www.git-scm.com/docs/git-pull) to rebase.
 
-</li>
+</li><br>
 
 <li>
 
-**Add upstream to original remote repository (Optional)**
+**(Optional)Add upstream to original remote repository**
 
-To be able to fetch and merge changes from this repository using (bash) commands, you need to add it as a (second) upstream.  
+To be able to fetch and merge changes from this repository using (bash) commands, you need to have a (second) upstream.  
+If you used the GitHub client to create the fork you can skip this step, otherwise enter the following commands
 
 ```bash
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
