@@ -36,7 +36,7 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 <li>
 
-[Git for Windows](https://gitforwindows.org/)**
+[Git for Windows](https://gitforwindows.org/)
 
 </li>
 
@@ -47,6 +47,26 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 </li>
 
 </ul>
+
+<li>
+
+**Install [Homebrew](https://brew.sh/) (MacOS only)**
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+</li>
+
+<li>
+
+**Install [GitHub client](https://cli.github.com/) (MacOS and Linux)**
+
+```bash
+brew install gh
+```
+
+</li>
 
 <li>
 
@@ -62,27 +82,45 @@ ssh-keygen -t Ed25519 -C {your@student.email.com}
 
 <li>
 
-**Copy your <b>public</b> key to Github**
+**Transfer your <b>public</b> key to Github**
 
-Enter the following in (git)bash to view the contents of you public key:
+If you installed the GitHub client, you can authenticate with the following command in the terminal and select ssh for authentication
+
+```sh
+gh auth login
+```
+
+otherwise enter the following in (git) bash shell to view the contents of your public key
+
 ```sh
 cat ~/.ssh/id_ed25519.pub
 ```
-and copy this in the text area when adding a [new ssh key in GitHub](https://github.com/settings/ssh/new)
+and paste this in the text area when adding a [new ssh key in GitHub](https://github.com/settings/ssh/new)
 
 </li>
 
-</li>
+<li>
 
 **Create a fork of this repository** 
 
+Create a fork of MitwRdam/MakeAIWork in [GitHub](https://github.com/MitwRdam/MakeAIWork) or 
+use the GitHub Client by entering the following commands in your terminal
+
+```bash
+gh repo fork https://github.com/MitwRdam/MakeAIWork
+```
 </li>
 
-</li>
+<li>
 
 **Clone your <b>fork</b>**
+If you installed the GitHub client, you can authenticate with the following command in the terminal
 
-Ennter the following command in your (git)bash shell after replacing {your_github_username} with your Gihub username.
+```sh
+gh repo clone git@github.com:{your_github_username}/MakeAIWork.git
+```
+
+otherwise enter the following command in your (git)bash shell after replacing {your_github_username} with your GitHub username.
 ```sh
 git clone git@github.com:{your_github_username}/MakeAIWork.git
 ```
@@ -114,13 +152,18 @@ This script will also set the [pull policy](https://www.git-scm.com/docs/git-pul
 
 <li>
 
-**Add upstream to original remote repository (Optional)**
+**Add upstream to original remote repository**
 
-To be able to fetch and merge changes from this repository using (bash) commands, you need to add it as a (second) upstream.  
+To be able To be able to fetch and merge changes from this repository using (bash) commands, you need to have a (second) upstream.  
+If you used the GitHub client to create the fork you can <strong>skip</strong> this step, otherwise enter the following commands
 
 ```bash
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
 ```
+
+</li>
+
+<li>
 
 Keep your fork repository up-todate by regularly pulling changes from the original remote repository into your local fork..
 
@@ -228,7 +271,15 @@ Install [Visual Studio Code](https://code.visualstudio.com)
 
 <li>
 
-Start vscode with command from current directory.
+**Enable VSCode to be opened from the command line (macOS only)**
+
+In VSCode, open the Command Palette and type 'shell command' in order to select the Shell command: Install ‘code’ command in PATH
+
+</li>
+
+<li>
+
+**Start vscode with command from current directory**
 
 Start a (git) bash shell and enter directory MakeAIWork, from there use the command <i>code</i> to start vscode.
 ```sh
