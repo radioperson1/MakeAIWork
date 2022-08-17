@@ -24,7 +24,7 @@ To be able to use this repository and handover your code, you need to have remot
 
 **Create an account at [Github](https://github.com)**
 
-</li><br>
+</li>
 
 <li>
 
@@ -44,9 +44,29 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 [Git for Mac](https://git-scm.com/download/mac)
 
-</li><br>
+</li>
 
 </ul>
+
+<li>
+
+**Install [Homebrew](https://brew.sh/) (MacOS only)**
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+</li>
+
+<li>
+
+**Install [GitHub client](https://cli.github.com/) (MacOS and Linux)**
+
+```bash
+brew install gh
+```
+
+</li>
 
 <li>
 
@@ -58,29 +78,26 @@ Start a (git) bash shell *and generate a secret key pair with your student email
 ssh-keygen -t Ed25519 -C {your@student.email.com}
 ```
 
-</li><br>
+</li>
 
 <li>
 
-**Copy your <b>public</b> key to Github**
+**Transfer your <b>public</b> key to Github**
 
-Enter the following in (git)bash to view the contents of you public key:
+If you installed the GitHub client, you can authenticate with the following command in the terminal
+
+```sh
+gh auth login
+```
+
+otherwise enter the following in (git) bash shell to view the contents of your public key
+
 ```sh
 cat ~/.ssh/id_ed25519.pub
 ```
 and copy this in the text area when adding a [new ssh key in GitHub](https://github.com/settings/ssh/new)
 
-</li><br>
-
-<li>
-
-**(Optional) Install [GitHub client](https://cli.github.com/) (MacOS and Linux)**
-
-```bash
-brew install gh
-```
-
-</li><br>
+</li>
 
 <li>
 
@@ -90,15 +107,19 @@ Create a fork of MitwRdam/MakeAIWork in [GitHub](https://github.com/MitwRdam/Mak
 use the GitHub Client by entering the following commands in your terminal
 
 ```bash
-gh auth login
 gh repo fork https://github.com/MitwRdam/MakeAIWork
 ```
 
-</li><br>
+</li>
 
 <li>
 
 **Clone your <b>fork</b>**
+If you installed the GitHub client, you can authenticate with the following command in the terminal
+
+```sh
+gh repo clone git@github.com:{your_github_username}/MakeAIWork.git
+```
 
 Ennter the following command in your (git)bash shell after replacing {your_github_username} with your Gihub username.
 ```sh
@@ -128,14 +149,14 @@ sh/git_config.sh {your_github_username} {your@student.email.com}
 ```
 This script will also set the [pull policy](https://www.git-scm.com/docs/git-pull) to rebase.
 
-</li><br>
+</li>
 
 <li>
 
-**(Optional)Add upstream to original remote repository**
+**(Optional) Add upstream to original remote repository**
 
 To be able to fetch and merge changes from this repository using (bash) commands, you need to have a (second) upstream.  
-If you used the GitHub client to create the fork you can skip this step, otherwise enter the following commands
+If you used the GitHub client to create the fork you can <strong>skip</strong> this step, otherwise enter the following commands
 
 ```bash
 git remote add mitwrdam https://github.com/MitwRdam/MakeAIWork
