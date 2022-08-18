@@ -235,8 +235,15 @@ To facilitate you with a managed portable [isolated](https://learndocker.online/
 <li>
 
 **Configure Docker Desktop**
+
 Open Docker Desktop, go to settings and select <i>Start when you login</i>
-<br>
+
+In Windows you can a script to enable Docker to start when you start Git Bash:
+
+```bash
+sh/add_docker_to_bashrc.sh
+```
+
 </li>
 
 <li>
