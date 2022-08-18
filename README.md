@@ -238,11 +238,13 @@ To facilitate you with a managed portable [isolated](https://learndocker.online/
 
 Open Docker Desktop, go to settings and select <i>Start when you login</i>
 
-In Windows you can a script to enable Docker to start when you start Git Bash:
+In Windows you can a script to enable Docker Desktop to start directly after you start Git Bash:
 
 ```bash
-sh/add_docker_to_bashrc.sh
+sh/git_bash_profile.sh
 ```
+
+this script will also navigate automatically to the MakeAIWork directory.
 
 </li>
 
@@ -260,8 +262,12 @@ If that works, you can run the scripts to start the Docker container as describe
 
 <li>
 
-**Install Python (Windows only)**
-Although we use Docker as the Python workspace, we also install [python](https://www.python.org/downloads/release/python-3105/) on our host to be able to automatically start the webbrowser after Jupyter has been started.
+**Enable the webbrowser to open automatically after starting a webservice (Windows only)**
+
+Install [python](https://www.python.org/downloads/release/python-3105/). 
+
+***NOTE***
+We only run Python directly on the host to sue the webbrowser module. For ad Docker Workaround on Windows, you need to install the Ubuntu in Windows sub-system.
 
 </li>
 
