@@ -6,3 +6,4 @@ project/.bash_history
 notebooks/.ipynb_checkpoints/
 notebooks/*_answers.ipynb
 notebooks/variables/.ipynb_checkpoints/
+notebooks/examples
