@@ -13,7 +13,8 @@ Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyte
 ---
 
 ## Python AI Workspace Installation
-Watch [instruction videos at YouTube](https://studio.youtube.com/channel/UCGBzbt5f8_AKVY9TYSEDZWw) 
+Watch [instruction videos at YouTube](https://youtube.com/playlist?list=PLf5zREwsIjUNQ2y4TGi9F0uXQZ1B08d_v) 
+
 
 ### Clone this Git repository
 To be able to use this repository and handover your code, you need to have remote access to Github.
