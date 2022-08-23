@@ -61,7 +61,7 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 <li>
 
-**(Optional) Install [iterm2](https://iterm2.com/) (MacOS)**
+**Install [iterm2](https://iterm2.com/) (MacOS)**
 
 ```bash
 brew install iterm2
@@ -71,7 +71,11 @@ brew install iterm2
 
 <li>
 
-**(Optional) Install zsh (MacOS and Ubuntu)**
+**Install zsh (MacOS and Ubuntu)**
+
+<ul>
+
+<li>
 
 Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) on MacOS using
 
@@ -79,26 +83,34 @@ Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-us
 brew install zsh
 ```
 
-To use zsh in iTerm2 run
-```bash
-echo "eval \"\$(homebrew/bin/brew shellenv)\"" >> ~/.zshrc
-```
-
 In Ubuntu
 ```bash
 sudo apt install zsh 
 ```
 
- </li>
+</li>
+
+<li>
+
+Add iTerm2 path to zsh profile
+ 
+ ```bash
+echo "eval \"\$(homebrew/bin/brew shellenv)\"" >> ~/.zshrc
+```
+
+</li>
  
  <li>
  
 **(Optional) Install oh-my-zsh (MacOS and Ubuntu)**
   
-Use the installation script otherwise
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
+
+</li>
+
+</ul>
 
 </li>
 
@@ -110,7 +122,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 brew install gh
 ```
  
-[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/ )
+[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/)
 
 </li>
 
@@ -301,13 +313,19 @@ If that works, you can run the scripts to start the Docker container as describe
 
 <li>
 
-**Enable the webbrowser to open automatically after starting a webservice**
+**Install python to enable the webbrowser to open automatically after starting a webservice**
 
-<li>Install [python](https://www.python.org/downloads/release/python-3105/)</li>
+<ol>
 
 <li>
 
-Install venv
+Install [python](https://www.python.org/downloads/release/python-3105/)
+
+</li>
+
+<li>
+
+Install venv (Ubuntu)
 
 ```sh
 sudo apt install python3.10-venv
@@ -317,16 +335,28 @@ sudo apt install python3.10-venv
 
 <li>
 
-Run and activate venv
+Create virtual Python environment
 
 ```sh
-sh/venv.sh
+python3 -m venv .
 ```
 
 </li>
 
+<li>
+
+Activate venv
+```sh
+source bin/activate
+```
+</li>
+
+</ol>
+
 ***NOTE***
 We only run Python directly on the host to sue the webbrowser module. For ad Docker Workaround on Windows, you need to install the Ubuntu in Windows sub-system.
+
+</li>
 
 </li>
 
@@ -485,7 +515,13 @@ Install Jupyterlab
 Students use a containerised Python environment running a [Docker](https://www.docker.com/) image. 
 
 ### Files available to the container
-The project files are accessible in the containerised runtime environment by means of a bind mount between the current (host)directory project and/or notebooks on your laptop and <i>/home/student/project</i> and/or <i>/home/student/nontebooks</i> at the container instance.
+The project files are accessible in the containerised runtime environment by means of a bind mount between the directories from the current path ($PWD) on your laptop (host) and the directories in the HOME directory at the container instance:
+<ul>
+<li>${PWD}/notebooks -> $HOME/notebooks</li>
+<li>${PWD}/pics      -> $HOME/pics</li>
+<li>${PWD}/projects  -> $HOME/projects</li>
+<li>${PWD}/scripts   -> $HOME/scripts</li>
+</ul>
 <br>
 
 ***CAUTION***
@@ -493,7 +529,7 @@ The project files are accessible in the containerised runtime environment by mea
 You can remove both container and image without data loss but be aware that files removed from the container directory /project will also be removed from you host directory project.
 <br>
 
-### Start a Python container
+### Scripts to use Python
 Docker scripts can be found in <i>docker</i>. Each of the scripts below will call <i>docker/run/miw_container.sh</i> to facilitate the following runtimes:
 
 <ul>
@@ -539,7 +575,11 @@ sh/bash.sh
 </li>
 
 </ul>
-  
+
+***NOTE***
+<br>
+If you do not have Docker, the scripts will fall back to python and bash on your host.
+
 ### Docker artifacts
 Each of the above scripts will call run/miw_container.sh which will spin up a container based on the latest version of 'jaboo/miw' which is either stored locally or will be fetched from available at [Dockerhub](https://hub.docker.com/repository/docker/jaboo/miw). 
 
