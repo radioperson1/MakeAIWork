@@ -60,7 +60,7 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 <li>
 
-**Install [GitHub client](https://cli.github.com/) (MacOS and Linux)**
+**Install [GitHub CLI](https://cli.github.com/) (MacOS and Linux)**
 
 ```bash
 brew install gh
