@@ -122,6 +122,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 brew install gh
 ```
 
+[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/ )
+
 [Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/)
 
 </li>
