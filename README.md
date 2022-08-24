@@ -170,15 +170,6 @@ git clone git@github.com:{your_github_username}/MakeAIWork.git
 
 <li>
 
-**Add execution permissions to the shell scripts**
-```bash
-chmod +x sh/*.sh
-```
-
-</li>
-
-<li>
-
 **Configure git**
 
 In order to commit and push your changes, you need identitify yourself. 
