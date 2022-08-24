@@ -7,7 +7,7 @@ nrOfArguments=${#argumentValues[@]}
 #  Image
 
 name="jaboo/miw"
-version="0.9"
+version="1.0-debian-slim"
 image="${name}:${version}"
 
 if [ $nrOfArguments -lt 1 ]; then
