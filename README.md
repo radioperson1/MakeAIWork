@@ -71,7 +71,7 @@ brew install iterm2
 
 <li>
 
-**(Optional) Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) (MacOS and Linux)**
+**(Optional) Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) (MacOS and Ubuntu)**
 
 Install zsh on MacOS using
 
@@ -79,6 +79,17 @@ Install zsh on MacOS using
 brew install zsh
 ```
 
+In Ubuntu
+```bash
+sudo apt install zsh 
+```
+
+ </li>
+ 
+ <li>
+ 
+**(Optional) Install oh-my-zsh (MacOS and Ubuntu)**
+  
 Use the installation script otherwise
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -88,11 +99,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 <li>
 
-**Install [GitHub CLI](https://cli.github.com/) (MacOS and Linux)**
+**Install [GitHub CLI](https://cli.github.com/) (MacOS and Ubuntu)**
 
 ```bash
 brew install gh
 ```
+ 
+[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/ )
 
 </li>
 
