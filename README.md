@@ -61,6 +61,33 @@ Make sure you select "Checkout as-is, commit Unix-style line endings" during the
 
 <li>
 
+**(Optional) Install [iterm2](https://iterm2.com/) (MacOS)**
+
+```bash
+brew install iterm2
+```
+
+</li>
+
+<li>
+
+**(Optional) Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) (MacOS and Linux)**
+
+Install zsh on MacOS using
+
+```bash
+brew install zsh
+```
+
+Use the installation script otherwise
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+</li>
+
+<li>
+
 **Install [GitHub CLI](https://cli.github.com/) (MacOS and Linux)**
 
 ```bash
@@ -232,6 +259,8 @@ To facilitate you with a managed portable [isolated](https://learndocker.online/
 <li>
 
 **Download and install [Docker Desktop](https://www.docker.com/get-started)**
+
+[Download for Mac with Apple M* chip](https://docs.docker.com/desktop/mac/apple-silicon/)
 
 <li>
 
