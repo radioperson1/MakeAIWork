@@ -36,13 +36,13 @@ function makeMacProof {
     dockerPostfix="--platform linux/amd64"
 
     # Set global variable DISPLAY to enable X Window System
-    hostIP=$(ifconfig en0 | grep 'inet ' | awk '{print $2}')
+    hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
     export DISPLAY="${hostIP}:0"
+    
 }
 
 dockerPrefix=""
 dockerPostfix=""
-hostIP=""
 
 # Detect OS
 unameOut="$(uname -s)"
