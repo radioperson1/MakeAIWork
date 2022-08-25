@@ -71,12 +71,17 @@ brew install iterm2
 
 <li>
 
-**(Optional) Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) (MacOS and Ubuntu)**
+**(Optional) Install zsh (MacOS and Ubuntu)**
 
-Install zsh on MacOS using
+Install [zsh](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/) on MacOS using
 
 ```bash
 brew install zsh
+```
+
+To use zsh in iTerm2 run
+```bash
+echo "eval \"\$(homebrew/bin/brew shellenv)\"" >> ~/.zshrc
 ```
 
 In Ubuntu
@@ -255,7 +260,7 @@ wsl –set-default-version 2
 
 </ol>
 
-### Install [Docker](https://learndocker.online/introduction/the-whats-and-whys/what-is-docker/) Desktop (Windows and MacOS)
+### Install Docker Desktop (Windows and MacOS)
 To facilitate you with a managed portable [isolated](https://learndocker.online/introduction/the-whats-and-whys/what-are-containers/) [Development Environment]((https://learndocker.online/introduction/the-whats-and-whys/why-docker-for-devs)), we provide a Docker image in which all dependencies are preinstalled. We prefer Docker for isolation since it is a much lighter solution than [Virtual Machine](https://learndocker.online/introduction/the-whats-and-whys/containers-vs-vms/). 
 
 <ol>
@@ -298,8 +303,6 @@ If that works, you can run the scripts to start the Docker container as describe
 
 **Enable the webbrowser to open automatically after starting a webservice**
 
-<ol>
-
 <li>Install [python](https://www.python.org/downloads/release/python-3105/)</li>
 
 <li>
@@ -314,7 +317,7 @@ sudo apt install python3.10-venv
 
 <li>
 
-Activate venv
+Run and activate venv
 
 ```sh
 sh/venv.sh
@@ -374,6 +377,77 @@ Follow the instructions at [Collaborate with Live Share](https://code.visualstud
 
 </ol>
 
+## Run Python scripts with Graphical UI in Docker (MacOS only)
+
+<ol>
+
+<li>
+
+**Install XQuartz X.Org Window System**
+On the MacOS host, we use xquartz to provide us with a MacOS X Window System.<br>
+Download and install [xquartz](https://www.xquartz.org/)<br>
+Log out and Log in to activate the changes the terminal
+
+</li>
+
+<li>
+
+**Configure XQuartz to allow network connections from host**
+
+<ol>
+
+<li>
+
+Get your IP address
+
+Run the following command in the terminal to see your IP address
+
+```bash
+ifconfig en0 | grep 'inet ' | awk '{print $2}'
+```
+
+<li>
+
+Start XQuartz
+
+```bash
+open -a XQuartz
+```
+
+which will open a XQuartz terminal in which you enter
+
+```sh
+xhost {Your IP}
+```
+
+Click on the word 'XQuartz' on the top left of your screen (next to the Apple logo) and select <i>Preference</i>. Open the tab 
+<i>Security</i> and check 'Allow connections from network clients' 
+
+</li>
+
+</ol>
+
+</li>
+
+<li>
+
+**Install Socat**
+The graphical Python script runs with a Linux X Window System in a Docker container. To connect this to the MacOS X Window System on the host we use the [command line utility socat](https://linux.die.net/man/1/socat). 
+
+```bash
+brew install socat
+```
+
+</li>
+
+<li>
+
+**Test by running a Python script with GUI**
+
+</li>
+
+</ol>
+
 ### Ubuntu in Windows sub-system (alternative for Windows users)
 Instead of Git bash and Docker, you can install a complete Ubuntu terminal environment with Windows Subsystem for Linux (WSL). Although Ubuntu can be installed in minutes, you lack the benefit of all preinstalled Python modules in an isolated container. 
 
@@ -387,7 +461,7 @@ Download and install [Ubuntu LTS on WSL2](https://ubuntu.com/tutorials/install-u
 
 <li>
 
-Install pip
+Install Miniconda
 
 </li>
 
@@ -489,4 +563,5 @@ docker/clean_docker_artifacts.sh
 
 ### References
 [How to Use Linux Terminal in Windows 10](https://allthings.how/how-to-use-linux-terminal-in-windows-10/)<br>
-[Jupyter](https://jupyter.org/)
+[Jupyter](https://jupyter.org/)<br>
+[Running GUI's with Docker on OS X](https://www.youtube.com/watch?v=PKyj8sbZNYw&list=LL&index=4&t=6s)
