@@ -7,7 +7,7 @@ nrOfArguments=${#argumentValues[@]}
 #  Image
 
 name="jaboo/miw"
-version="0.9"
+version="1.0-debian-slim"
 image="${name}:${version}"
 
 if [ $nrOfArguments -lt 1 ]; then
@@ -28,16 +28,28 @@ function makeWindowsProof {
     hostdirProjects=$(cygpath -w -p ${hostdirProjects})
     hostdirPics=$(cygpath -w -p ${hostdirPics})
     hostdirScripts=$(cygpath -w -p ${hostdirScripts})
-    prefix="winpty "
+    dockerPrefix="winpty "
 }
 
-# Windows environment?
-prefix=""
+function makeMacProof {
+    # Support Apple M* processors
+    dockerPostfix="--platform linux/amd64"
+
+    # Set global variable DISPLAY to enable X Window System
+    hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
+    export DISPLAY="${hostIP}:0"
+    export LIBGL_ALLOW_SOFTWARE=1
+}
+
+dockerPrefix=""
+dockerPostfix=""
+
+# Detect OS
 unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
     Linux*)     machine="Linux";;
-    Darwin*)    machine="Mac";;
+    Darwin*)    machine="Mac" && makeMacProof;;
     CYGWIN*)    machine="Cygwin" && makeWindowsProof;;
     MINGW*)     machine="Git Bash" && makeWindowsProof;;
     *)          machine="UNKNOWN:${os}"
@@ -59,9 +71,10 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
+# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${hostIP}:0\" --net=host --add-host=host.docker.internal:host-gateway"
 graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${DISPLAY}\" --net=host"
 
-cmd="${prefix}docker run -it --rm --name ${containerName}"
+cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
 cmd="${cmd} -v \"${hostdirNotebooks}:${containerdirNotebooks}\""
 cmd="${cmd} -v \"${hostdirPics}:${containerdirPics}\""
 cmd="${cmd} -v \"${hostdirProjects}:${containerdirProjects}\""
