@@ -38,7 +38,7 @@ function makeMacProof {
     # Set global variable DISPLAY to enable X Window System
     hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
     export DISPLAY="${hostIP}:0"
-    
+    export LIBGL_ALLOW_SOFTWARE=1
 }
 
 dockerPrefix=""
