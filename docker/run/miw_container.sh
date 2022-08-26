@@ -7,7 +7,7 @@ nrOfArguments=${#argumentValues[@]}
 #  Image
 
 name="jaboo/miw"
-version="1.0-ubuntu"
+version="0.9"
 image="${name}:${version}"
 
 if [ $nrOfArguments -lt 1 ]; then
@@ -72,6 +72,7 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
+# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${hostIP}:0\" --net=host --add-host=host.docker.internal:host-gateway"
 graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${DISPLAY}\" --net=host"
 graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
@@ -86,21 +87,21 @@ case "${mode}" in
         entryPoint="bash"
         cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
     jupyter*)
-        version="latest"     
+        version="latest"
         composefile="${composePath}/python-ai-jupyter.yaml"
         export IMAGE=${image}
         export CONTAINER_NAME=${containerName}
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entryPoint="ptipython"
-        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;        
+        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
     python-script*)
         entryPoint="run_script"
         cmd="${cmd} ${graphicsParams}"
         cmd="${cmd} -e SCRIPT=\"${argumentValues[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
-    *)      
-        cmd="${cmd} ${image}";;        
+    *)
+        cmd="${cmd} ${image}";;
 esac
 
 printf "%s cmd : \n\t%s\n\n" "$0" "${cmd}"
