@@ -6,8 +6,8 @@ nrOfArguments=${#argumentValues[@]}
 
 #  Image
 
-name="jaboo/miw"
-version="1.0-debian-slim"
+name="jaboo/miw-notebook"
+version="1.0-ubuntu"
 image="${name}:${version}"
 
 if [ $nrOfArguments -lt 1 ]; then
@@ -38,7 +38,6 @@ function makeMacProof {
     # Set global variable DISPLAY to enable X Window System
     hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
     export DISPLAY="${hostIP}:0"
-    export LIBGL_ALLOW_SOFTWARE=1
 }
 
 dockerPrefix=""
@@ -55,6 +54,7 @@ case "${os}" in
     *)          machine="UNKNOWN:${os}"
 esac
 
+export LIBGL_ALLOW_SOFTWARE=1
 export HOSTPATH_NOTEBOOKS=${hostdirNotebooks}
 export HOSTPATH_PICS=${hostdirPics}
 export HOSTPATH_PROJECT=${hostdirProjects}
