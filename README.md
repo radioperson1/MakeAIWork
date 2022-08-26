@@ -313,13 +313,19 @@ If that works, you can run the scripts to start the Docker container as describe
 
 <li>
 
-**Enable the webbrowser to open automatically after starting a webservice**
+**Install python to enable the webbrowser to open automatically after starting a webservice**
 
-<li>Install [python](https://www.python.org/downloads/release/python-3105/)</li>
+<ol>
 
 <li>
 
-Install venv
+Install [python](https://www.python.org/downloads/release/python-3105/)
+
+</li>
+
+<li>
+
+Install venv (Ubuntu)
 
 ```sh
 sudo apt install python3.10-venv
@@ -329,11 +335,23 @@ sudo apt install python3.10-venv
 
 <li>
 
-Run and activate venv
+Create virtual Python environment
 
 ```sh
-sh/venv.sh
+python3 -m venv .
 ```
+
+</li>
+
+<li>
+
+Activate venv
+```sh
+source bin/activate
+```
+</li>
+
+</ol>
 
 ***NOTE***
 We only run Python directly on the host to sue the webbrowser module. For ad Docker Workaround on Windows, you need to install the Ubuntu in Windows sub-system.
