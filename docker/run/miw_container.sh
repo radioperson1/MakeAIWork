@@ -6,7 +6,7 @@ nrOfArguments=${#argumentValues[@]}
 
 #  Image
 
-name="jaboo/miw-notebook"
+name="jaboo/miw"
 version="1.0-ubuntu"
 image="${name}:${version}"
 
@@ -36,8 +36,10 @@ function makeMacProof {
     dockerPostfix="--platform linux/amd64"
 
     # Set global variable DISPLAY to enable X Window System
-    hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
+    hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | tail -n 1)
+    printf "hostIP : %s\n" "${hostIP}"
     export DISPLAY="${hostIP}:0"
+    export LIBGL_ALLOW_SOFTWARE=1
 }
 
 dockerPrefix=""
@@ -54,7 +56,6 @@ case "${os}" in
     *)          machine="UNKNOWN:${os}"
 esac
 
-export LIBGL_ALLOW_SOFTWARE=1
 export HOSTPATH_NOTEBOOKS=${hostdirNotebooks}
 export HOSTPATH_PICS=${hostdirPics}
 export HOSTPATH_PROJECT=${hostdirProjects}
@@ -71,15 +72,14 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
-# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${hostIP}:0\" --net=host --add-host=host.docker.internal:host-gateway"
 graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${DISPLAY}\" --net=host"
+graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
 cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
 cmd="${cmd} -v \"${hostdirNotebooks}:${containerdirNotebooks}\""
 cmd="${cmd} -v \"${hostdirPics}:${containerdirPics}\""
 cmd="${cmd} -v \"${hostdirProjects}:${containerdirProjects}\""
 cmd="${cmd} -v \"${hostdirScripts}:${containerdirScripts}\""
-cmd="${cmd} ${graphicsParams}"
 
 case "${mode}" in
     bash*)
@@ -92,10 +92,11 @@ case "${mode}" in
         export CONTAINER_NAME=${containerName}
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
-        entryPoint="ptpython"
+        entryPoint="ptipython"
         cmd="${cmd} --entrypoint ${entryPoint} ${image}";;        
     python-script*)
         entryPoint="run_script"
+        cmd="${cmd} ${graphicsParams}"
         cmd="${cmd} -e SCRIPT=\"${argumentValues[1]}\" --entrypoint ${entryPoint} ${image}";;
     # Default
     *)      
