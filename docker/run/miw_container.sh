@@ -76,11 +76,7 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
-<<<<<<< HEAD
-# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix:ro\" -e \"DISPLAY=${DISPLAY}\" --net=host"
-=======
 # graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${hostIP}:0\" --net=host --add-host=host.docker.internal:host-gateway"
->>>>>>> 75659e3 (Back to image version 0.9)
 graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
 cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
@@ -101,11 +97,7 @@ case "${mode}" in
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
         entryPoint="ptipython"
-<<<<<<< HEAD
         cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
-=======
-        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;        
->>>>>>> 43edf17 (Fix to grep ip on macos)
     python-script*)
         entryPoint="run_script"
         cmd="${cmd} ${graphicsParams}"
