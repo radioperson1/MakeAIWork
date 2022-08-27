@@ -6,7 +6,7 @@ nrOfArguments=${#argumentValues[@]}
 
 #  Image
 
-name="jaboo/miw"
+name="jaboo/miw-notebook"
 version="1.0-ubuntu"
 image="${name}:${version}"
 
