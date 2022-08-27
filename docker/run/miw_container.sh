@@ -29,9 +29,9 @@ function makeWindowsProof {
     hostdirPics=$(cygpath -w -p ${hostdirPics})
     hostdirScripts=$(cygpath -w -p ${hostdirScripts})
     dockerPrefix="winpty "
-    hostIP=$( ipconfig | grep IPv4 | sed 's/.*://' | tail -n1 | xargs)
-    # export DISPLAY="${hostIP}:0"
-    export DISPLAY="host.docker.internal:0.0"
+    # hostIP=$( ipconfig | grep IPv4 | sed 's/.*://' | tail -n1 | xargs)
+    export DISPLAY="${hostIP}:0"
+    # export DISPLAY="host.docker.internal:0.0"
 }
 
 function makeMacProof {
@@ -76,7 +76,11 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
+<<<<<<< HEAD
 # graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix:ro\" -e \"DISPLAY=${DISPLAY}\" --net=host"
+=======
+# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${hostIP}:0\" --net=host --add-host=host.docker.internal:host-gateway"
+>>>>>>> 75659e3 (Back to image version 0.9)
 graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
 cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
