@@ -36,7 +36,7 @@ function makeWindowsProof {
 
 function makeMacProof {
     # Support Apple M* processors
-    dockerPostfix="--platform linux/amd64"
+    dockerPostfix=" --platform linux/arm64/v8"
 
     # Set global variable DISPLAY to enable X Window System
     hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | tail -n 1)
@@ -59,6 +59,7 @@ case "${os}" in
 esac
 
 printf "hostIP : [%s]\n" "${hostIP}"
+printf "dockerPostfix : [%s]\n" "${dockerPostfix}"
 
 export HOSTPATH_NOTEBOOKS=${hostdirNotebooks}
 export HOSTPATH_PICS=${hostdirPics}
@@ -79,7 +80,7 @@ composePath="docker/compose"
 graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix:ro\" -e \"DISPLAY=${DISPLAY}\" --net=host"
 graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
-cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
+cmd="${dockerPrefix}docker run -it --rm --name ${containerName}"
 cmd="${cmd} -v \"${hostdirNotebooks}:${containerdirNotebooks}\""
 cmd="${cmd} -v \"${hostdirPics}:${containerdirPics}\""
 cmd="${cmd} -v \"${hostdirProjects}:${containerdirProjects}\""
@@ -88,7 +89,7 @@ cmd="${cmd} -v \"${hostdirScripts}:${containerdirScripts}\""
 case "${mode}" in
     bash*)
         entryPoint="bash"
-        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
+        cmd="${cmd}${dockerPostfix} --entrypoint ${entryPoint} ${image}";;
     jupyter*)
         version="latest"
         composefile="${composePath}/python-ai-jupyter.yaml"
