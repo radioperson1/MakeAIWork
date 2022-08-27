@@ -29,6 +29,9 @@ function makeWindowsProof {
     hostdirPics=$(cygpath -w -p ${hostdirPics})
     hostdirScripts=$(cygpath -w -p ${hostdirScripts})
     dockerPrefix="winpty "
+    hostIP=$( ipconfig | grep IPv4 | sed 's/.*://' | tail -n1 | xargs)
+    # export DISPLAY="${hostIP}:0"
+    export DISPLAY="host.docker.internal:0.0"
 }
 
 function makeMacProof {
@@ -37,7 +40,6 @@ function makeMacProof {
 
     # Set global variable DISPLAY to enable X Window System
     hostIP=$(ifconfig | grep 'inet ' | awk '{print $2}' | tail -n 1)
-    printf "hostIP : %s\n" "${hostIP}"
     export DISPLAY="${hostIP}:0"
     export LIBGL_ALLOW_SOFTWARE=1
 }
@@ -56,6 +58,8 @@ case "${os}" in
     *)          machine="UNKNOWN:${os}"
 esac
 
+printf "hostIP : [%s]\n" "${hostIP}"
+
 export HOSTPATH_NOTEBOOKS=${hostdirNotebooks}
 export HOSTPATH_PICS=${hostdirPics}
 export HOSTPATH_PROJECT=${hostdirProjects}
@@ -72,7 +76,7 @@ containerdirProjects="${containerHome}/projects"
 containerdirPics="${containerHome}/pics"
 containerdirScripts="${containerHome}/scripts"
 composePath="docker/compose"
-graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix\" -e \"DISPLAY=${DISPLAY}\" --net=host"
+# graphicsParams="-v \"/tmp/.X11-unix:/tmp/.X11-unix:ro\" -e \"DISPLAY=${DISPLAY}\" --net=host"
 graphicsParams="-e \"DISPLAY=${DISPLAY}\" --net=host"
 
 cmd="${dockerPrefix}docker run ${dockerPostfix} -it --rm --name ${containerName}"
