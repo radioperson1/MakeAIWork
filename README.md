@@ -126,6 +126,9 @@ brew install gh
 
 [Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/)
 
+***NOTE***<br>
+Although you could download and install GitHub CLI for Windows, I don't recommend it since it does not properly work in Git Bash.
+
 </li>
 
 <li>
