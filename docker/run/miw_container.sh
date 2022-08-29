@@ -6,8 +6,8 @@ nrOfArguments=${#argumentValues[@]}
 
 #  Image
 
-name="jaboo/miw-notebook"
-version="1.0-ubuntu"
+name="jaboo/miw"
+version="0.9"
 image="${name}:${version}"
 
 if [ $nrOfArguments -lt 1 ]; then
