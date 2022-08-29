@@ -4,7 +4,7 @@ argumentNames=("mode" "[script]")
 argumentValues=("$@")
 nrOfArguments=${#argumentValues[@]}
 
-#  Image
+#  Default stable image
 
 name="jaboo/miw"
 version="0.9"
@@ -91,14 +91,14 @@ case "${mode}" in
         entryPoint="bash"
         cmd="${cmd}${dockerPostfix} --entrypoint ${entryPoint} ${image}";;
     jupyter*)
-        version="latest"
+        image="jaboo/miw-notebook:0.1"
         composefile="${composePath}/python-ai-jupyter.yaml"
         export IMAGE=${image}
         export CONTAINER_NAME=${containerName}
         cmd="docker/compose/up.sh ${composefile}";;
     python-repl*)
-        entryPoint="ptipython"
-        cmd="${cmd} --entrypoint ${entryPoint} ${image}";;
+        image="jaboo/miw-ptpython:0.1-alpine"
+        cmd="${cmd} ${image}";;
     python-script*)
         entryPoint="run_script"
         cmd="${cmd} ${graphicsParams}"
