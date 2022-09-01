@@ -5,12 +5,12 @@ source env/bin/activate
 
 # CONDA
 
-# # Install tensorflow and lidar
-# conda install -c conda-forge tensorflow \
-#   tensorflow \
-#   tensorboard-plugin-wit \
-#   tensorflow-estimator \
-#   lidar
+# Install tensorflow and lidar
+conda install -c conda-forge tensorflow \
+  tensorflow \
+  tensorboard-plugin-wit \
+  tensorflow-estimator \
+  lidar
 
 #  PIP
 
