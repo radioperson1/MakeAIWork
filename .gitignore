@@ -22,3 +22,4 @@ notebooks/cursisten
 env/
 log.txt
 .DS_Store
+env/
