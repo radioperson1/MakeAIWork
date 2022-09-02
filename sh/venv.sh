@@ -30,9 +30,4 @@ case "${os}" in
 esac
 
 # Activate virtual environment env
-source ${activatePath}
-
-activatePath=$(realpath env/bin/activate)
-
-# Automatically activate env
-touch ~/.bash_profile && echo "source ${activatePath}" >> ~/.bash_profile
+source env/bin/activate
