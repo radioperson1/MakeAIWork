@@ -19,3 +19,5 @@ scripts/solar_system/.DS_Store
 .DS_Store
 simulations/
 notebooks/cursisten
+env/
+log.txt
