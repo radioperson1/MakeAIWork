@@ -7,7 +7,7 @@ cmd="docker/run/miw_container.sh jupyter"
 # No docker?
 if (! command -v ${runnable} &> /dev/null) then
     echo "Try locally installed jupyter"
-    runnable="jupyter-lab"
+    runnable="python3 -m jupyterlab"
 
     if (! command -v ${runnable} &> /dev/null) then
         echo "${runnable} could not be found"
