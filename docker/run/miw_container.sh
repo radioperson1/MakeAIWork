@@ -96,7 +96,7 @@ case "${mode}" in
     jupyter*)
         image="jaboo/miw-notebook:0.1"
         composefile="${composePath}/python-ai-jupyter.yaml"
-        version="0.1"
+        version="latest"
         image="${repo}/miw-notebook:${version}"
         export IMAGE=${image}
         export CONTAINER_NAME=${containerName}
