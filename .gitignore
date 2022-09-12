@@ -13,3 +13,7 @@ pyvenv.cfg
 lib64
 etc/
 share/
+notebooks/variables/.DS_Store
+scripts/.DS_Store
+scripts/solar_system/.DS_Store
+.DS_Store
