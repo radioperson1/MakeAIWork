@@ -1,40 +1,18 @@
 #!/usr/bin/env bash
 
-# # Activate virtual environment env
-# source env/bin/activate
-
-# CONDA
-
-# Install Miniconda
-function installConda {
-  if (machine=="Mac") then
-    echo "Install Miniconda for %s" "${machine}"
-
-    arch=$(uname -m)
-    printf "Detected architecture %s\n" "${arch}"
-
-    if (arch=="aarch64") then
-      # Support Apple M* processors
-      condaInstaller="install/conda/Miniconda3-latest-MacOSX-arm64.sh"
-    else
-      condaInstaller="install/conda/Miniconda3-latest-MacOSX-x86_64.sh"
-    fi
-
-    eval "${condaInstaller}" && ( zsh || bash)
-
-  fi
-}
-
 # Detect OS
 unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
-    Linux*)     machine="Linux";;
+    Linux*)     
+      machine="Linux";;
+      sudo apt install freeglut
+    ;;
     Darwin*)
       machine="Mac"
       brew update && brew install freeglut
       export LIBGL_ALLOW_SOFTWARE=1
-      ;;
+    ;;
     CYGWIN*)    machine="Cygwin";;
     MINGW*)     machine="Git Bash";;
     *)          machine="UNKNOWN:${os}"
@@ -42,7 +20,7 @@ esac
 
 function install_with_conda {
   if (! command -v "conda" &> /dev/null ) then
-    installConda
+    echo "Install Miniconda first!" && exit 0
   fi
 
   conda install --yes -c conda-forge \
