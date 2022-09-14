@@ -8,7 +8,7 @@ unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
     Linux*)     machine="Linux";;
-    Darwin*)    
+    Darwin*)
       machine="Mac"
       brew update && brew install freeglut
       export LIBGL_ALLOW_SOFTWARE=1
@@ -61,5 +61,5 @@ function install_with_pip {
 
 }
 
-install_with_conda
-install_with_pip 
+# install_with_conda
+install_with_pip
