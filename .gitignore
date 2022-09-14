@@ -17,3 +17,6 @@ share/
 env/
 simulations/
 log.txt
+scripts/shape/__pycache__/
+notebooks/pics/.ipynb_checkpoints/
+notebooks/neural/.ipynb_checkpoints/
