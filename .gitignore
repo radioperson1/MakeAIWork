@@ -24,3 +24,4 @@ log.txt
 .DS_Store
 env/
 simulations/
+scripts/shape/__pycache__/
