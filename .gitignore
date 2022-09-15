@@ -25,3 +25,4 @@ log.txt
 env/
 simulations/
 scripts/shape/__pycache__/
+notebooks/solutions
