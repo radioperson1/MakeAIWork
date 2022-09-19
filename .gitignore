@@ -26,3 +26,10 @@ env/
 simulations/
 scripts/shape/__pycache__/
 notebooks/solutions
+notebooks/matplotlib/.ipynb_checkpoints/
+notebooks/csv/.ipynb_checkpoints/
+notebooks/numpy/.ipynb_checkpoints/
+notebooks/neural/.ipynb_checkpoints/
+notebooks/pics/.ipynb_checkpoints/
+notebooks/pandas/.ipynb_checkpoints/
+
