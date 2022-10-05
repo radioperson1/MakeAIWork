@@ -5,8 +5,8 @@ unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
     Linux*)     
-      machine="Linux";;
-      sudo apt install freeglut
+      machine="Linux"
+      # sudo dnf install freeglut
     ;;
     Darwin*)
       machine="Mac"
@@ -32,19 +32,19 @@ function install_with_conda {
     Keras-Preprocessing \
     lidar \
     matplotlib-base \
-    numexpr \
+    matplotlib-venn \
     pandas \
     Pillow \
     pyopengl \
+    pyspark \
     pytables \
     scikit-image \
     scikit-learn \
     scipy \
     seaborn \
     selenium \
-    statsmodels \
-    sympy \
-    tensorflow \
+    sqlite \
+    tensorflow=2.8 \
     tensorboard-plugin-wit \
     tensorflow-estimator \
     widgetsnbextension
@@ -62,4 +62,4 @@ function install_with_pip {
 }
 
 install_with_conda
-install_with_pip
+#install_with_pip
