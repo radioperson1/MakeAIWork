@@ -39,6 +39,7 @@ class Employee:
         employee2 = Employee(firstName="Anton", lastName="Diepenhorst", pay=4500, bonus=1000)
         print(f"Annual salary of {employee1.getFullname()} : {employee1.annualSalary}")
         print(f"Annual salary of {employee2.getFullname()} : {employee2.annualSalary}")
+        print(f"__name__: {__name__}")
 
     if __name__ == "main":
         main()
