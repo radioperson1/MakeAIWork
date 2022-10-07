@@ -45,7 +45,7 @@ git add p1 && git commit -m "Deliverable Periode 1"
 Git export van p1 maken
 
 ```bash
-git archive -o "../{voornaam}_{achternaam}.zip" HEAD:p1
+git archive -o "../{voornaam}_{achternaam}_p1.zip" HEAD:p1
 ```
 
 </li>
