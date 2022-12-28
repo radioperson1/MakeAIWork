@@ -1,5 +1,6 @@
 matplotlib-venn
 numpy
+pylib
 ptpython
 scipy
 SimPyLC==3.10.0
