@@ -6,6 +6,8 @@
 
 Paden aanpassen
 
+chmod +x convert_path.py && ./convert_path.py "relative\path\to\model"
+
 <ul>
 
 <li>In VsCode selecteer je het bestand met de rechtermuisknop en kies je 'Copy Relative Path'</li>
