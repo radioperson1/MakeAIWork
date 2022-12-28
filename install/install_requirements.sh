@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-# # Activate virtual environment env
-# source env/bin/activate
-
 # Detect OS
 unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
-    Linux*)     machine="Linux";;
+    Linux*)     
+      machine="Linux"
+      # sudo dnf install freeglut
+    ;;
     Darwin*)
       machine="Mac"
       brew update && brew install freeglut
       export LIBGL_ALLOW_SOFTWARE=1
-      ;;
+    ;;
     CYGWIN*)    machine="Cygwin";;
     MINGW*)     machine="Git Bash";;
     *)          machine="UNKNOWN:${os}"
@@ -20,7 +20,7 @@ esac
 
 function install_with_conda {
   if (! command -v "conda" &> /dev/null ) then
-    echo "Install Miniconda first\n" && exit 0
+    echo "Install Miniconda first!" && exit 0
   fi
 
   conda install --yes -c conda-forge \
@@ -32,19 +32,19 @@ function install_with_conda {
     Keras-Preprocessing \
     lidar \
     matplotlib-base \
-    numexpr \
+    matplotlib-venn \
     pandas \
     Pillow \
     pyopengl \
+    pyspark \
     pytables \
     scikit-image \
     scikit-learn \
     scipy \
     seaborn \
     selenium \
-    statsmodels \
-    sympy \
-    tensorflow \
+    sqlite \
+    tensorflow=2.8 \
     tensorboard-plugin-wit \
     tensorflow-estimator \
     widgetsnbextension
@@ -61,5 +61,5 @@ function install_with_pip {
 
 }
 
-# install_with_conda
-install_with_pip
+install_with_conda
+#install_with_pip

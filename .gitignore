@@ -13,10 +13,10 @@ pyvenv.cfg
 lib64
 etc/
 share/
-.DS_Store
+notebooks/variables/.DS_Store
+scripts/.DS_Store
+scripts/solar_system/.DS_Store
 env/
-simulations/
 log.txt
-scripts/shape/__pycache__/
-notebooks/pics/.ipynb_checkpoints/
-notebooks/neural/.ipynb_checkpoints/
+.DS_Store
+scripts/shape/__pycache__
