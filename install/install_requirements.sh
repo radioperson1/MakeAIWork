@@ -1,65 +1,77 @@
 #!/usr/bin/env bash
 
+function installWithoutConda {
+  echo "Install without conda"
+
+  echo "Install requierments with pip"
+  python -m pip install --no-cache-dir -r install/pip/no_conda.txt
+
+}  
+
+function installWithConda {
+  echo "Install with conda"
+  
+  if (! command -v "conda" &> /dev/null ) then
+    echo "Try to install basic Python requirements without Miniconda\n"
+    installWithoutConda
+  else
+    conda install --yes -c conda-forge \
+      beautifulsoup4 \
+      flask \
+      jupyter_core \
+      jupyterlab \
+      keras \
+      Keras-Preprocessing \
+      matplotlib-base \
+      nodejs \
+      Pillow \
+      pandas \
+      py-cpuinfo \
+      pyopengl \
+      pytables  \
+      scikit-image \
+      scikit-learn \
+      scipy \
+      seaborn \
+      selenium \
+      statsmodels \
+      sympy
+  fi
+
+}
+
+# Install all required libraries t
+function installWithPip {
+  echo "Install with pip"
+
+  echo "Prepare pip"
+  python -m pip install --upgrade pip    
+  python -m pip install setuptools
+  python -m pip install -U sentence-transformers
+  echo "Install requierments with pip"
+  python -m pip install --no-cache-dir -r install/pip/requirements.txt
+
+}
+
 # Detect OS
 unameOut="$(uname -s)"
 os="${unameOut:0:7}"
 case "${os}" in
     Linux*)     
-      machine="Linux"
-      # sudo dnf install freeglut
+      installWithConda
+      installWithPip
     ;;
+    # MacOS
     Darwin*)
-      machine="Mac"
-      brew update && brew install freeglut
-      export LIBGL_ALLOW_SOFTWARE=1
+      installWithConda
+      installWithPip
     ;;
-    CYGWIN*)    machine="Cygwin";;
-    MINGW*)     machine="Git Bash";;
-    *)          machine="UNKNOWN:${os}"
+    # Git Bash
+    MINGW*)     
+      installWithoutConda
+      installWithPip
+    ;;
+    *)          
+      installWithoutConda
+      installWithPip
 esac
-
-function install_with_conda {
-  if (! command -v "conda" &> /dev/null ) then
-    echo "Install Miniconda first!" && exit 0
-  fi
-
-  conda install --yes -c conda-forge \
-    beautifulsoup4 \
-    py-cpuinfo \
-    jupyter_core \
-    jupyterlab \
-    keras \
-    Keras-Preprocessing \
-    lidar \
-    matplotlib-base \
-    matplotlib-venn \
-    pandas \
-    Pillow \
-    pyopengl \
-    pyspark \
-    pytables \
-    scikit-image \
-    scikit-learn \
-    scipy \
-    seaborn \
-    selenium \
-    sqlite \
-    tensorflow=2.8 \
-    tensorboard-plugin-wit \
-    tensorflow-estimator \
-    widgetsnbextension
-}
-
-# Install all required libraries t
-function install_with_pip {
-  # Upgrade pip
-  python3 -m pip install --upgrade pip
-
-  # Install setuptools
-  python3 -m pip install setuptools
-  python3 -m pip install --no-cache-dir -r install/pip/requirements.txt
-
-}
-
-install_with_conda
-#install_with_pip

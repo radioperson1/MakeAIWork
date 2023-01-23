@@ -1,23 +1,17 @@
 # MakeAIWork
 
-## Projects
-
-This repository contains sources to be used by python students. Directory <i>projects</i> contains the (re)sources:
-<ul>
-<li>p1, p2 and p3</i> containing
-<i>cursus_materiaal</i> with a project description
-</ul>
-
-Directory <i>notebooks</i> contains Jupyter notebooks that can be used in Jupyter Lab. Directory <i>scripts</i> contains some example Python scripts.
-
----
-
 ## Python AI Workspace Installation
-Watch [instruction videos at YouTube](https://youtube.com/playlist?list=PLf5zREwsIjUNQ2y4TGi9F0uXQZ1B08d_v)
+<br>
+
+***NOTE***<br>Watch [instruction videos at YouTube](https://youtube.com/playlist?list=PLf5zREwsIjUNQ2y4TGi9F0uXQZ1B08d_v)
+
+<br>
+
+**Install the following Applications on your Laptop / MacBook and make sure to use your email address of the Hogeschool Rotterdam for any user account**
 
 
-### Clone this Git repository
-To be able to use this repository and handover your code, you need to have remote access to Github.
+### Git
+To be able to use the resources from this repository on your local machine and push code to your own (forked) remote git repository, you need to have remote access to Github.
 
 <ol>
 
@@ -122,10 +116,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 brew install gh
 ```
 
-[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/ )
-
-[Installation instructions on Ubuntu](https://www.techiediaries.com/install-github-cli-ubuntu-20/)
-
 ***NOTE***<br>
 Although you could download and install GitHub CLI for Windows, I don't recommend it since it does not properly work in Git Bash.
 
@@ -138,7 +128,7 @@ Although you could download and install GitHub CLI for Windows, I don't recommen
 Start a (git) bash shell *and generate a secret key pair with your student email adress
 
 ```sh
-ssh-keygen -t Ed25519 -C {your@student.email.com}
+ssh-keygen -t Ed25519 -C {your_username@student.hr.nl}
 ```
 
 </li>
@@ -198,7 +188,7 @@ In order to commit and push your changes, you need identitify yourself.
 
 Open a (git)bash, enter directory MakeAIWork and run:
 ```bash
-sh/git_config.sh {your_github_username} {your@student.email.com}
+install/git_config.sh {your_github_username} {your@student.email.com}
 ```
 This script will also set the [pull policy](https://www.git-scm.com/docs/git-pull) to rebase.
 
@@ -235,90 +225,7 @@ git push
 
 </ol>
 
-### Enable [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)
-<ol>
-
-<li>
-
-**Check If Your Processor Supports [Virtualization](https://www.technorms.com/8208/check-if-processor-supports-virtualization)**
-
-</li>
-
-<li>
-
-**Enable Windows Subsystem for Linux**
-
-Enter the following command in Windows Powershell:
-```pwsh
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
-
-</li>
-
-<li>
-
-**Enable the Virtual Machine Platform feature (Windows only)**
-Enter the following command in Windows Powershell:
-```pwsh
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-```
-
-</li>
-
-<li>
-
-**Make WSL 2 Default (Windows only)**
-Enter the following command in Windows Powershell:
-```pwsh
-wsl –set-default-version 2
-```
-
-</li>
-
-</ol>
-
-### Install Docker Desktop (Windows and MacOS)
-To facilitate you with a managed portable [isolated](https://learndocker.online/introduction/the-whats-and-whys/what-are-containers/) [Development Environment]((https://learndocker.online/introduction/the-whats-and-whys/why-docker-for-devs)), we provide a Docker image in which all dependencies are preinstalled. We prefer Docker for isolation since it is a much lighter solution than [Virtual Machine](https://learndocker.online/introduction/the-whats-and-whys/containers-vs-vms/).
-
-<ol>
-
-<li>
-
-**Download and install [Docker Desktop](https://www.docker.com/get-started)**
-
-[Download for Mac with Apple M* chip](https://docs.docker.com/desktop/mac/apple-silicon/)
-
-<li>
-
-**Configure Docker Desktop**
-
-Open Docker Desktop, go to settings and select <i>Start when you login</i>
-
-In Windows you can a script to enable Docker Desktop to start directly after you start Git Bash:
-
-```bash
-sh/git_bash_profile.sh
-```
-
-this script will also navigate automatically to the MakeAIWork directory.
-
-</li>
-
-<li>
-
-**Test your Docker installation**
-Check if you are able to use Docker by running an example container in <b>(git) bash</b>
-```sh
-docker run hello-world
-```
-
-If that works, you can run the scripts to start the Docker container as described in section <u>Python AI Workspace Usage</u>.
-
-</li>
-
-<li>
-
-**Install python to enable the webbrowser to open automatically after starting a webservice**
+### Python
 
 <ol>
 
@@ -330,36 +237,71 @@ Install [python](https://www.python.org/downloads/release/python-3105/)
 
 <li>
 
-Install venv (Ubuntu)
+Install Miniconda (MacOS and Linux)
 
+Download and install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+</li>
+
+<li>
+
+Create virtual Python environment 
 ```sh
-sudo apt install python3.10-venv
+install/create_virtual_env.sh
 ```
 
 </li>
 
 <li>
 
-Create virtual Python environment
+Install Python libraries
 
-```sh
-python3 -m venv .
+```bash
+install/install_requirements.sh
 ```
 
 </li>
 
 <li>
 
-Activate venv
-```sh
-source bin/activate
+Test your Python Installation 
+
+<ul>
+
+<li>
+
+Enter the following command in your Terminal or Git Bash
+```bash
+python
 ```
+
+this will start the <b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. 
+
+Enter the following line to test the Python libraries installation
+```bash
+import PIL
+```
+
+Exit by pressing [Control+D].
+
 </li>
 
-</ol>
+<li>
+
+Start Jupyter Lab by entering the following command in your Terminal or Git Bash
+
+```bash
+sh/jupyter.sh
+```
 
 ***NOTE***
-We only run Python directly on the host to sue the webbrowser module. For ad Docker Workaround on Windows, you need to install the Ubuntu in Windows sub-system.
+You can also use the Jupyter plugin in VSCode.
+
+</li>
+
+</ul>
+
+</ol>
 
 </li>
 
@@ -367,7 +309,7 @@ We only run Python directly on the host to sue the webbrowser module. For ad Doc
 
 </ol>
 
-### Edit with Visual Studio Code
+### Visual Studio Code
 <ol>
 
 <li>
@@ -412,7 +354,101 @@ Follow the instructions at [Collaborate with Live Share](https://code.visualstud
 
 </ol>
 
-## Run Python scripts with Graphical UI in Docker (MacOS only)
+### Docker (Periode 2)
+
+<ol>
+
+<li>
+
+*[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (Windows only)*
+
+<ol>
+
+<li>
+
+**Check If Your Processor Supports [Virtualization](https://www.technorms.com/8208/check-if-processor-supports-virtualization)**
+
+</li>
+
+<li>
+
+**Enable Windows Subsystem for Linux**
+
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+
+</li>
+
+<li>
+
+**Enable the Virtual Machine Platform feature**
+Enter the following command in Windows Powershell:
+```pwsh
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+</li>
+
+<li>
+
+**Make WSL 2 Default**
+Enter the following command in Windows Powershell:
+```pwsh
+wsl –set-default-version 2
+```
+
+</li>
+
+</ol>
+
+</li>
+
+<li>
+
+*Install Docker Desktop*
+To facilitate you with a managed portable [isolated](https://learndocker.online/introduction/the-whats-and-whys/what-are-containers/) [Development Environment]((https://learndocker.online/introduction/the-whats-and-whys/why-docker-for-devs)), we provide a Docker image in which all dependencies are preinstalled. We prefer Docker for isolation since it is a much lighter solution than [Virtual Machine](https://learndocker.online/introduction/the-whats-and-whys/containers-vs-vms/).
+
+<ol>
+
+<li>
+
+**Download and install [Docker Desktop](https://www.docker.com/get-started)**
+
+[Download for Mac with Apple M* chip](https://docs.docker.com/desktop/mac/apple-silicon/)
+
+<li>
+
+**Configure Docker Desktop**
+
+Open Docker Desktop, go to settings and select <i>Start when you login</i>
+
+In Windows you can a script to enable Docker Desktop to start directly after you start Git Bash:
+
+```bash
+sh/git_bash_profile.sh
+```
+
+this script will also navigate automatically to the MakeAIWork directory.
+
+</li>
+
+<li>
+
+**Test your Docker installation**
+Check if you are able to use Docker by running an example container in <b>(git) bash</b>
+```sh
+docker run hello-world
+```
+
+</li>
+
+</ol>
+
+### OpenGL (Periode 2)
+
+For the Simulation Project you need an OpenGL environment.
 
 <ol>
 
@@ -483,126 +519,7 @@ brew install socat
 
 </ol>
 
-### Ubuntu in Windows sub-system (alternative for Windows users)
-Instead of Git bash and Docker, you can install a complete Ubuntu terminal environment with Windows Subsystem for Linux (WSL). Although Ubuntu can be installed in minutes, you lack the benefit of all preinstalled Python modules in an isolated container.
-
-<ol>
-
-<li>
-
-Download and install [Ubuntu LTS on WSL2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#3-download-ubuntu)
-
-</li>
-
-<li>
-
-Install Miniconda
-
-</li>
-
-<li>
-
-Install dependencies
-
-</li>
-
-<li>
-
-Install Jupyterlab
-
-</li>
-
-</ol>
-
----
-
-## Python AI Workspace Usage
-Students use a containerised Python environment running a [Docker](https://www.docker.com/) image.
-
-### Files available to the container
-The project files are accessible in the containerised runtime environment by means of a bind mount between the directories from the current path ($PWD) on your laptop (host) and the directories in the HOME directory at the container instance:
-<ul>
-<li>${PWD}/notebooks -> $HOME/notebooks</li>
-<li>${PWD}/pics      -> $HOME/pics</li>
-<li>${PWD}/projects  -> $HOME/projects</li>
-<li>${PWD}/scripts   -> $HOME/scripts</li>
-</ul>
-<br>
-
-***CAUTION***
-<br>
-You can remove both container and image without data loss but be aware that files removed from the container directory /project will also be removed from you host directory project.
-<br>
-
-### Scripts to use Python
-Docker scripts can be found in <i>docker</i>. Each of the scripts below will call <i>docker/run/miw_container.sh</i> to facilitate the following runtimes:
-
-<ul>
-
-<li>
-
-<b>REPL</b> (Read Evaluate Print Loop) modus to experimentally learn Python commands. Exit by pressing [Control+D].
-
-```bash
-sh/python.sh
-```
-
-</li>
-
-<li>
-
-Start python with a <b>script</b> from directory <i>project</i>
-
-```bash
-sh/python.sh scripts/lists/sum.py
-```
-
-</li>
-
-<li>
-
-Start <b>Jupyter Lab</b> to learn from the <i>notebooks</i> available at <i>project/notebooks</i>
-
-```bash
-sh/jupyter.sh
-```
-
-</li>
-
-<li>
-
-Start container with an interactive <b>bash</b> (expert mode) to perform system operations
-
-```sh
-sh/bash.sh
-```  
-
-</li>
-
-</ul>
-
-***NOTE***
-<br>
-If you do not have Docker, the scripts will fall back to python and bash on your host.
-
-### Docker artifacts
-Each of the above scripts will call run/miw_container.sh which will spin up a container based on the latest version of 'jaboo/miw' which is either stored locally or will be fetched from available at [Dockerhub](https://hub.docker.com/repository/docker/jaboo/miw).
-
-Inspect locally stored images with
-```sh
-docker images
-```
-
-The containers will be removed automatically after being terminated. For overview of both running and terminated containers enter  
-```sh
-docker container ls -a
-```
-
-Removing images and/containers will not cause data loss. After removing the image, Docker will pull a new instance when you start a container.
-Docker images and containers can be removed (if not done automatically) by running
-```sh
-docker/clean_docker_artifacts.sh
-```
+## Project
 
 ---
 
