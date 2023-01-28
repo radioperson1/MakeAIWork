@@ -3,20 +3,20 @@
 function installWithoutConda {
   echo "Install without conda"
 
-  echo "Install requierments with pip"
+  echo "Install requirements with pip"
   python -m pip install --no-cache-dir -r install/pip/no_conda.txt
 
 }  
 
-function installWithConda {
-  echo "Install with conda"
-  
-  if (! command -v "conda" &> /dev/null ) then
-    echo "Try to install basic Python requirements without Miniconda\n"
+function installWithConda { 
+  if (! which conda &>/dev/null)
+  then  
+    printf "Try to install basic Python requirements without Miniconda\n"
     installWithoutConda
   else
     conda install --yes -c conda-forge \
       beautifulsoup4 \
+      django \
       flask \
       jupyter_core \
       jupyterlab \
