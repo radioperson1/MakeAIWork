@@ -1,17 +1,12 @@
 .idea/
 project/notebooks/.ipynb_checkpoints
 project/.bash_history
-notebooks/.ipynb_checkpoints/
-notebooks/*_answers.ipynb
-notebooks/variables/.ipynb_checkpoints/
-notebooks/examples
 bin/
 lib/
 pyvenv.cfg
 lib64
 etc/
 share/
-notebooks/variables/.DS_Store
 scripts/.DS_Store
 scripts/solar_system/.DS_Store
 env/
@@ -27,4 +22,6 @@ projects/proj_gezondheidszorg/rest_server/medisch_centrum_randstad/rest_api/mana
 projects/proj_gezondheidszorg/rest_server/medisch_centrum_randstad/rest_api/migrations/__pycache__
 projects/proj_gezondheidszorg/rest_server/medisch_centrum_randstad/rest_api/migrations/0001_initial.py
 projects/proj_gezondheidszorg/rest_server/medisch_centrum_randstad/rest_api/favicon/site.webmanifest
-
+practica/week1/notebooks/numpy/csv/.ipynb_checkpoints/
+practica/week1/notebooks/neural/
+practica/week1/notebooks/variables/.ipynb_checkpoints/
