@@ -136,3 +136,4 @@ ypy-websocket = "==0.8.2"
 
 [requires]
 python_version = "3.9"
+python_full_version = "3.9.16"
