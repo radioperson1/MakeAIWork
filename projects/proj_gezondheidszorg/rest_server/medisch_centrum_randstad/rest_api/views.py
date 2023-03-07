@@ -29,8 +29,8 @@ class CustomPagination(PageNumberPagination):
         if (self.page.has_previous()):
             response.data['previous'] = self.get_previous_link()
 
-        response.data['data'] = data
-
+        response.data['data'] = self.page
+        
         return response
 
 
