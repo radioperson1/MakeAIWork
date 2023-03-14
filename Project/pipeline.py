@@ -25,7 +25,7 @@ dbConnection = sqlite3.connect(dbName)
 
 # Haal alle gegevens op uit de tabel rest_netlify_api en sla die op in een Pandas dataframe
 # Zie notebook data_collection
-dfFromDB = pd.read_sql_query(f"SELECT * FROM {tableName}", dbConnection)
+df = pd.read_sql_query(f"SELECT * FROM {tableName}", dbConnection)
 pd.set_option('display.max_columns', 10)
 dfFromDB.drop(['id'], axis=1)
 
@@ -33,6 +33,9 @@ logging.info("Transform the data")
 
 
 # Sheets -> Data Selection
+
+for c in df.columns:
+    df[c] = pd.to_numeric(df[c], errors='coerce')
 
 # outliers
 
