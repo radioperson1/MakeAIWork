@@ -4,23 +4,22 @@
 import pandas as pd
 import sqlite3
 import logging
+from pathlib import Path
 
 logging.basicConfig(level=logging.DEBUG)
 
 # Global variables
 # Relatief pad naar data
 dbPath = "/Data"
-
-# Extract
-# Sheets -> Collection
-
 dbName = "Project/Data/db.sqlite3"
 tableName = "rest_api_netlify"
-
+# Extract
+# Sheets -> Collection
 
 logging.info("Extract from DB")
 
 # Maak een verbinding met de SQLite DB
+
 dbConnection = sqlite3.connect(dbName)
 
 # Haal alle gegevens op uit de tabel rest_netlify_api en sla die op in een Pandas dataframe
@@ -71,8 +70,8 @@ df_not_genetic = df.drop(['genetic'], axis = 1)
 df_ng = df_not_genetic
 
 # Zie notebook SQL Practicum
-df.to_sql('new_table', con=con, index=False)
-
+df.to_sql('bmi', con=dbConnection, if_exists=replace, index=False)
+logging.info("Succes")
 # Sluit database
 
 con.close()
